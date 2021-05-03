@@ -4,6 +4,7 @@ import 'package:weather_app/presentation/widgets/custom_bottom_sheet_tile.dart';
 import 'package:weather_app/presentation/widgets/custom_index_indicator.dart';
 import 'package:weather_app/presentation/widgets/weather_day_tile.dart';
 import 'package:weather_app/presentation/widgets/weather_display_tile.dart';
+import 'package:weather_app/utils/app_color.dart';
 
 class WeatherScreen extends StatefulWidget {
   @override
@@ -16,27 +17,43 @@ class _WeatherScreenState extends State<WeatherScreen> {
   ScrollController _controller;
   int _currentIndex = 0;
 
-  _scrollListener() {
-    if (_controller.offset >= _controller.position.maxScrollExtent &&
-        !_controller.position.outOfRange) {
-      setState(() {
-        _currentIndex = 1;
-      });
-    }
-    if (_controller.offset <= _controller.position.minScrollExtent &&
-        !_controller.position.outOfRange) {
-      setState(() {
-        _currentIndex = 1;
-      });
-    }
-  }
+  _scrollListener() {}
 
   @override
   void initState() {
-    //_controller = ScrollController();
-    //_controller.addListener(_scrollListener());
     weathers = weatherData.getWeatherData();
+    _controller = ScrollController(initialScrollOffset: 0.0);
+
+    _controller.addListener(() {
+      print('${_controller.offset} offset');
+      print('${_controller.position.maxScrollExtent} maxScrollExtent');
+      print('${_controller.position.minScrollExtent} minScrollExtent');
+      if (_controller.offset == _controller.position.minScrollExtent) {
+        setState(() {
+          _currentIndex = 1;
+        });
+      }
+      if (_controller.offset < _controller.position.maxScrollExtent &&
+          _controller.offset > 0.0 &&
+          !_controller.position.outOfRange) {
+        setState(() {
+          _currentIndex = 2;
+        });
+      }
+      if (_controller.offset >= _controller.position.maxScrollExtent &&
+          !_controller.position.outOfRange) {
+        setState(() {
+          _currentIndex = 3;
+        });
+      }
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -71,8 +88,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
               height: 30.0,
             ),
             Text(
-              'NEXT 15 DAYS',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+              'NEXT 5 DAYS',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ),
             ),
             SizedBox(
               height: 15.0,
@@ -80,7 +100,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
             SizedBox(
               height: _size.height * 0.29,
               child: ListView.builder(
-                //controller: _controller,
+                controller: _controller,
                 padding: EdgeInsets.all(0.0),
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
@@ -106,13 +126,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomIndexIndicator(
-                  color: _currentIndex == 1 ? Colors.red : Colors.grey,
+                  color: _currentIndex == 1 || _currentIndex == 0
+                      ? AppColor.thurColor
+                      : AppColor.fadeWhite,
                 ),
                 CustomIndexIndicator(
-                  color: _currentIndex == 1 ? Colors.red : Colors.grey,
+                  color: _currentIndex == 2
+                      ? AppColor.thurColor
+                      : AppColor.fadeWhite,
                 ),
                 CustomIndexIndicator(
-                  color: _currentIndex == 1 ? Colors.red : Colors.grey,
+                  color: _currentIndex == 3
+                      ? AppColor.thurColor
+                      : AppColor.fadeWhite,
                 ),
               ],
             )
