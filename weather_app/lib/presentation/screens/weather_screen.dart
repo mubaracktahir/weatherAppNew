@@ -17,8 +17,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
   ScrollController _controller;
   int _currentIndex = 0;
 
-  _scrollListener() {}
-
   @override
   void initState() {
     weathers = weatherData.getWeatherData();
@@ -107,7 +105,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 itemCount: weathers.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showBottomSheet(context);
+                    },
                     child: WeatherDayTile(
                       height: _size.height * 0.23,
                       width: _size.width * 0.33,
@@ -147,4 +147,25 @@ class _WeatherScreenState extends State<WeatherScreen> {
       ),
     );
   }
+}
+
+showBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.green,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(
+            40.0,
+          ),
+          topRight: Radius.circular(
+            40.0,
+          ),
+        ),
+      ),
+      enableDrag: false,
+      context: context,
+      builder: (context) {
+        return CustomButtomSheetTile();
+      });
 }

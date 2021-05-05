@@ -8,13 +8,74 @@ class CustomButtomSheetTile extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        WeatherDayTile(
-          height: _size.height * 0.80,
+        Container(
+          height: _size.height * 0.8,
           width: double.infinity,
-          day: 'Monday',
-          degree: '40',
-          minDegree: '56',
-          maxDegree: '69',
+          padding: EdgeInsets.only(top: 45.0),
+          margin: EdgeInsets.symmetric(horizontal: 12.0),
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: Colors.green.withOpacity(0.4),
+              offset: Offset(8, 8),
+              blurRadius: 3.0,
+              //spreadRadius: 1.0,
+            )
+          ]),
+          child: Column(
+            children: [
+              Text(
+                'Monday',
+                style: TextStyle(
+                  height: 2.0,
+                  fontSize: 47.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                '☼',
+                style: TextStyle(
+                  fontSize: 100.0,
+                  height: 1,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                '23°',
+                style: TextStyle(
+                  fontSize: 61.0,
+                  height: 2,
+                  color: Colors.white,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '52°',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      height: 2,
+                      color: Colors.grey.withOpacity(0.4),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 35.0,
+                  ),
+                  Text(
+                    '67°',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      height: 2,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
         Positioned(
           left: _size.width / 2 - 25,
@@ -28,14 +89,26 @@ class CustomButtomSheetTile extends StatelessWidget {
               width: 50.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(300),
-                color: Colors.yellowAccent,
+                color: Colors.white,
               ),
               child: Icon(
                 Icons.cancel,
               ),
             ),
           ),
-        )
+        ),
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: _size.height * (147 / 896),
+              margin: EdgeInsets.only(right: 12.0, left: 12.0, bottom: 12.0),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.0)),
+            ),
+          ),
+        ),
       ],
     );
   }

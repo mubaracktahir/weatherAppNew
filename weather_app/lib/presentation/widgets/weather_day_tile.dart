@@ -37,7 +37,9 @@ class WeatherDayTile extends StatelessWidget {
               color: this.color,
               boxShadow: [
                 BoxShadow(
-                  color: this.color.withOpacity(0.4),
+                  color: this.color == null
+                      ? Colors.black26
+                      : this.color.withOpacity(0.4),
                   offset: Offset(8, 8),
                   blurRadius: 3.0,
                   //spreadRadius: 1.0,
