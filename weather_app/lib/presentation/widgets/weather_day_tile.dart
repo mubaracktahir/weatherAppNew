@@ -7,8 +7,6 @@ class WeatherDayTile extends StatelessWidget {
   final String degree;
   final String minDegree;
   final String maxDegree;
-  final double height;
-  final double width;
   final Color color;
 
   const WeatherDayTile({
@@ -18,8 +16,6 @@ class WeatherDayTile extends StatelessWidget {
     this.degree,
     this.minDegree,
     this.maxDegree,
-    this.height,
-    this.width,
     this.color,
   }) : super(key: key);
   @override
@@ -28,23 +24,24 @@ class WeatherDayTile extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: this.height == null ? 0.0 : this.height,
-          width: this.height == null ? 0.0 : this.width,
+          height: _size.height * 0.25,
+          width: _size.width * 0.33,
           padding: EdgeInsets.only(top: 15.0),
           margin: EdgeInsets.symmetric(horizontal: 12.0),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: this.color,
-              boxShadow: [
-                BoxShadow(
-                  color: this.color == null
-                      ? Colors.black26
-                      : this.color.withOpacity(0.4),
-                  offset: Offset(8, 8),
-                  blurRadius: 3.0,
-                  //spreadRadius: 1.0,
-                )
-              ]),
+            borderRadius: BorderRadius.circular(20.0),
+            color: this.color,
+            boxShadow: [
+              BoxShadow(
+                color: this.color == null
+                    ? Colors.black26
+                    : this.color.withOpacity(0.4),
+                offset: Offset(8, 8),
+                blurRadius: 3.0,
+                //spreadRadius: 1.0,
+              )
+            ],
+          ),
           child: Column(
             children: [
               Text(
@@ -69,6 +66,9 @@ class WeatherDayTile extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
+              SizedBox(
+                height: 5,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -79,7 +79,7 @@ class WeatherDayTile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 5.0,
+                    width: 10.0,
                   ),
                   Text(
                     this.maxDegree == null ? '' : this.maxDegree,
@@ -91,7 +91,7 @@ class WeatherDayTile extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 5.0,
+          height: 10.0,
         )
       ],
     );

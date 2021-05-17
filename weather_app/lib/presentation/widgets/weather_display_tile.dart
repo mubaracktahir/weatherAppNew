@@ -5,14 +5,15 @@ class WeatherDisplayTile extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.only(top: 5.0),
-      height: _size.height * 0.40,
+      margin: EdgeInsets.only(bottom: 5.0),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(26.0),
         color: Colors.purpleAccent,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             '25°',
