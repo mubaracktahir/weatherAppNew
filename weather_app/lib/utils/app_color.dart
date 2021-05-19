@@ -9,4 +9,7 @@ class AppColor {
   static final Color friColor = Color(0xffdc0000);
 
   static final fadeWhite = Color(0xffedf0f5);
+
+  static final gradientTop = Color(0xff5D50FE);
+  static final gradientBottom = Color(0xff008CFF);
 }
