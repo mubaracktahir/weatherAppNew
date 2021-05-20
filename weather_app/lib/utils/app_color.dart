@@ -7,6 +7,7 @@ class AppColor {
   static final Color wedColor = Color(0xffffae00);
   static final Color thurColor = Color(0xff0090ff);
   static final Color friColor = Color(0xffdc0000);
+  static final deepBlue = Color(0xff130e51);
 
   static final fadeWhite = Color(0xffedf0f5);
 
