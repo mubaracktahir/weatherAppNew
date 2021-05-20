@@ -28,7 +28,6 @@ class _WeatherSplashState extends State<WeatherSplash>
           ..forward()
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed && splashFlag != true) {
-              print(splashFlag);
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return WeatherScreen();
               }));
