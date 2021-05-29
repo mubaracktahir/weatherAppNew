@@ -11,70 +11,92 @@ class WeatherSplash extends StatefulWidget {
 
 class _WeatherSplashState extends State<WeatherSplash>
     with TickerProviderStateMixin {
-  AnimationController _splashAnimation;
-  AnimationController cloudController;
-  AnimationController _backgroundCity;
-  AnimationController _foregroundCity;
-  AnimationController _fadedBackgroundLeftCloud;
-  AnimationController _fadedBackgroundRightCloud;
+  AnimationController _cloudController;
+  AnimationController _backgroundCityController;
+  AnimationController _foregroundCityController;
   Animation<double> cloudAnimation;
   Animation<double> foregroundCityTransition;
   Animation<double> fadeInTransition;
 
-  Animation<RelativeRect> _positionAnimation;
-  double _height = 0.0;
-  double _width = 0.0;
   VisitPref _visitPref = VisitPref();
-  bool splashFlag;
+  bool splashFlag = true;
+  bool _onFadeOnbackgroundFlag = false;
+  bool _onFinishedCloubdTransition = false;
 
   Future<void> loadVisitFlag() async {
     splashFlag = await _visitPref.getInitialVisitFlag();
     setState(() {});
   }
 
+  void navigationControl() {
+    _foregroundCityController.reverseDuration = Duration(milliseconds: 100);
+    _foregroundCityController.reverse();
+    _foregroundCityController.addListener(() {
+      if (_foregroundCityController.isDismissed) {
+        _backgroundCityController.reverseDuration = Duration(milliseconds: 250);
+        _backgroundCityController.reverse();
+        _backgroundCityController.addListener(() {
+          if (_backgroundCityController.isDismissed) {
+            setState(() {
+              _onFinishedCloubdTransition = true;
+            });
+          }
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
     loadVisitFlag();
     //controllers
-    _splashAnimation =
-        AnimationController(vsync: this, duration: Duration(seconds: 6))
-          ..forward();
-    cloudController =
+    _cloudController =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
-    _backgroundCity =
+    _backgroundCityController =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
-    _foregroundCity =
+    _foregroundCityController =
         AnimationController(vsync: this, duration: Duration(seconds: 2))
           ..forward()
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed) {
-              _backgroundCity.forward();
+              _backgroundCityController.forward();
             }
           });
+    _backgroundCityController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          _onFadeOnbackgroundFlag = true;
+        });
+      }
+    });
+    _cloudController.addStatusListener((status) {
+      if (status == AnimationStatus.completed && splashFlag == false) {
+        navigationControl();
+      }
+    });
     //animations & transitions
     foregroundCityTransition =
-        Tween<double>(begin: 0.0, end: 1.0).animate(_foregroundCity);
+        Tween<double>(begin: 0.0, end: 1.0).animate(_foregroundCityController);
 
     fadeInTransition =
-        Tween<double>(begin: 0.0, end: 1.0).animate(_backgroundCity);
+        Tween<double>(begin: 0.0, end: 1.0).animate(_backgroundCityController);
     cloudAnimation =
-        Tween<double>(begin: 0.0, end: 1.0).animate(cloudController);
+        Tween<double>(begin: 0.0, end: 1.0).animate(_cloudController);
 
     super.initState();
   }
 
   @override
   void dispose() {
-    _splashAnimation.dispose();
-    _backgroundCity.dispose();
-    cloudController.dispose();
+    _foregroundCityController.dispose();
+    _backgroundCityController.dispose();
+    _cloudController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-    double bottomDrawable = _size.height / 2;
     return Scaffold(
       body: Stack(
         alignment: Alignment.bottomCenter,
@@ -101,7 +123,7 @@ class _WeatherSplashState extends State<WeatherSplash>
             rect: RelativeRectTween(
               begin: RelativeRect.fromLTRB(0.0, _size.height * 0.30, 0.0, 0.0),
               end: RelativeRect.fromLTRB(0.0, _size.height * 0.15, 0.0, 0.0),
-            ).animate(_backgroundCity),
+            ).animate(_backgroundCityController),
             child: FadeTransition(
               opacity: fadeInTransition,
               child: Image(
@@ -126,7 +148,7 @@ class _WeatherSplashState extends State<WeatherSplash>
             rect: RelativeRectTween(
               begin: RelativeRect.fromLTRB(0.0, _size.height * 0.30, 0.0, 0.0),
               end: RelativeRect.fromLTRB(0.0, _size.height * 0.25, 0.0, 0.0),
-            ).animate(_backgroundCity),
+            ).animate(_backgroundCityController),
             child: FadeTransition(
               opacity: fadeInTransition,
               child: Image(
@@ -150,34 +172,82 @@ class _WeatherSplashState extends State<WeatherSplash>
           ),
 
           //left background cloud
-          Positioned(
-            top: _size.height / 8,
-            left: _size.width / 8,
-            child: Image(
-              width: _size.width / 3.0,
-              image: DrawableImage('ic_splash_big_cloud', scale: 2.0),
+          TweenAnimationBuilder(
+            tween: Tween<double>(
+              begin: -_size.width / 3.0,
+              end: _onFadeOnbackgroundFlag
+                  ? _onFinishedCloubdTransition
+                      ? _size.width + _size.width / 3
+                      : _size.width / 8
+                  : -_size.width / 3.0,
             ),
+            onEnd: () {
+              if (_onFadeOnbackgroundFlag && !_onFinishedCloubdTransition) {
+                _cloudController.forward();
+              }
+              if (_onFinishedCloubdTransition) {
+                _cloudController.reverseDuration = Duration(milliseconds: 300);
+                _cloudController.reverse();
+                _cloudController.addListener(() {
+                  if (_cloudController.isDismissed && splashFlag != true) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return WeatherScreen();
+                    }));
+                  }
+                });
+              }
+            },
+            duration: _onFinishedCloubdTransition
+                ? Duration(milliseconds: 200)
+                : Duration(seconds: 2),
+            builder: (_, value, __) {
+              return Positioned(
+                top: _size.height / 8,
+                left: value,
+                child: Image(
+                  width: _size.width / 3.0,
+                  image: DrawableImage('ic_splash_big_cloud', scale: 2.0),
+                ),
+              );
+            },
           ),
+
           //right cloud transition
-          Positioned(
-            top: _size.height / 4,
-            right: 0.0,
-            child: Image(
-              width: _size.width / 3.0,
-              image: DrawableImage('ic_splash_small_cloud', scale: 2.0),
+          TweenAnimationBuilder(
+            tween: Tween<double>(
+              begin: -_size.width / 3.0,
+              end: _onFadeOnbackgroundFlag
+                  ? _onFinishedCloubdTransition
+                      ? _size.width + _size.width / 20
+                      : _size.width / 8
+                  : -_size.width / 3.0,
             ),
+            duration: _onFinishedCloubdTransition
+                ? Duration(milliseconds: 200)
+                : Duration(seconds: 2),
+            builder: (_, value, __) {
+              return Positioned(
+                top: _size.height / 4,
+                right: value,
+                child: Image(
+                  width: _size.width / 3.0,
+                  image: DrawableImage('ic_splash_small_cloud', scale: 2.0),
+                ),
+              );
+            },
           ),
 
           //initial explore buttom
           Visibility(
-            visible: splashFlag ?? false,
+            visible: splashFlag,
             child: GestureDetector(
               onTap: () {
                 _visitPref.setVisitFlag(false);
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return WeatherScreen();
-                }));
+                setState(() {
+                  splashFlag = false;
+                  navigationControl();
+                });
               },
               child: Container(
                 width: _size.width,

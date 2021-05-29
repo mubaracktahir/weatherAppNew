@@ -6,7 +6,7 @@ class VisitPref {
   Future<bool> getInitialVisitFlag() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool visitFlag = prefs.getBool(prefName) ?? true;
-    return visitFlag;
+    return Future<bool>.value(visitFlag);
   }
 
   Future setVisitFlag(bool visitFlag) async {
