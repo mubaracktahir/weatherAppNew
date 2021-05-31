@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/presentation/screens/examplePaint.dart';
 import 'package:weather_app/presentation/screens/weather_splash.dart';
 
 void main() {

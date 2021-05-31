@@ -16,6 +16,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   List<Weather> weathers;
   ScrollController _controller;
   int _currentIndex = 0;
+  bool increaseWeatherTile = false;
 
   @override
   void initState() {
@@ -45,12 +46,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
         });
       }
     });
+    print(increaseWeatherTile);
     super.initState();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+
     super.dispose();
   }
 
@@ -61,89 +64,103 @@ class _WeatherScreenState extends State<WeatherScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0) + EdgeInsets.only(top: 30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Icons.lightbulb),
-                  //Spacer(),
-                  Text('ghjklnbnghjbn'),
-                  Icon(Icons.search),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(Icons.lightbulb),
+                //Spacer(),
+                Text('ghjklnbnghjbn'),
+                Icon(Icons.search),
+              ],
             ),
-            Expanded(
-              flex: 10,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: WeatherDisplayTile(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    increaseWeatherTile = !increaseWeatherTile;
+                    print(increaseWeatherTile);
+                  });
+                  print(increaseWeatherTile);
+                },
+                child: WeatherDisplayTile(
+                  increaseTile: increaseWeatherTile,
+                ),
               ),
             ),
             SizedBox(
-              height: 25.0,
+              height: 10.0,
             ),
-            Expanded(
-              child: Text(
-                'NEXT 5 DAYS',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 6,
-              child: SizedBox(
-                //height: _size.height * 0.29,
-                child: ListView.builder(
-                  controller: _controller,
-                  padding: EdgeInsets.all(0.0),
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: weathers.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        showBottomSheet(context);
-                      },
-                      child: WeatherDayTile(
-                        day: weathers[index].day,
-                        icon: weathers[index].icon,
-                        degree: '${weathers[index].humidity.toString()}°',
-                        minDegree: '${weathers[index].minDegree.toString()}°',
-                        maxDegree: '${weathers[index].maxDegree.toString()}°',
-                        color: weathers[index].color,
+            Visibility(
+              visible: !increaseWeatherTile,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(left: 10.0, bottom: 10.0),
+                      child: Text(
+                        'NEXT 5 DAYS',
+                        style: TextStyle(
+                          //height: 1.2,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                        ),
                       ),
-                    );
-                  },
+                    ),
+                    SizedBox(
+                      height: _size.height * 0.29,
+                      child: ListView.builder(
+                        controller: _controller,
+                        padding: EdgeInsets.all(0.0),
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: weathers.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              showBottomSheet(context);
+                            },
+                            child: WeatherDayTile(
+                              day: weathers[index].day,
+                              icon: weathers[index].icon,
+                              degree: '${weathers[index].humidity.toString()}°',
+                              minDegree:
+                                  '${weathers[index].minDegree.toString()}°',
+                              maxDegree:
+                                  '${weathers[index].maxDegree.toString()}°',
+                              color: weathers[index].color,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomIndexIndicator(
+                          color: _currentIndex == 1 || _currentIndex == 0
+                              ? AppColor.thurColor
+                              : AppColor.fadeWhite,
+                        ),
+                        CustomIndexIndicator(
+                          color: _currentIndex == 2
+                              ? AppColor.thurColor
+                              : AppColor.fadeWhite,
+                        ),
+                        CustomIndexIndicator(
+                          color: _currentIndex == 3
+                              ? AppColor.thurColor
+                              : AppColor.fadeWhite,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomIndexIndicator(
-                    color: _currentIndex == 1 || _currentIndex == 0
-                        ? AppColor.thurColor
-                        : AppColor.fadeWhite,
-                  ),
-                  CustomIndexIndicator(
-                    color: _currentIndex == 2
-                        ? AppColor.thurColor
-                        : AppColor.fadeWhite,
-                  ),
-                  CustomIndexIndicator(
-                    color: _currentIndex == 3
-                        ? AppColor.thurColor
-                        : AppColor.fadeWhite,
-                  ),
-                ],
               ),
             ),
           ],
