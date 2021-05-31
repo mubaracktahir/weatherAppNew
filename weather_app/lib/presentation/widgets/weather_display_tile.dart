@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/utils/app_color.dart';
 import './customCloudySun.dart';
 
 class WeatherDisplayTile extends StatefulWidget {
@@ -13,15 +14,11 @@ class WeatherDisplayTile extends StatefulWidget {
 class _WeatherDisplayTileState extends State<WeatherDisplayTile>
     with SingleTickerProviderStateMixin {
   final bool increaseTile;
-  AnimationController _position;
-  bool _positionFlag = false;
 
   _WeatherDisplayTileState({this.increaseTile});
 
   @override
   void initState() {
-    _position =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
     super.initState();
   }
 
@@ -36,10 +33,10 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
           margin: EdgeInsets.only(bottom: 5.0),
           width: double.infinity,
           height:
-              widget.increaseTile ? _size.height * 0.80 : _size.height * 0.45,
+              widget.increaseTile ? _size.height * 0.80 : _size.height * 0.40,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(26.0),
-            color: Colors.purpleAccent,
+            borderRadius: BorderRadius.circular(30.0),
+            color: AppColor.gradientTop,
           ),
           duration: Duration(milliseconds: 200),
         ),
@@ -90,7 +87,7 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
           duration: Duration(milliseconds: 200),
           bottom: widget.increaseTile
               ? -_size.width * 0.5 * 0.3
-              : -_size.width * 0.5 * 0.4,
+              : -_size.width * 0.5 * 0.3,
           right: widget.increaseTile
               ? _size.width * 0.4
               : -_size.width * 0.5 * 0.2,
