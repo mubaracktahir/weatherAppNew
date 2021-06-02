@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="out">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/weather_app/build/app/intermediates/project_dex_archive/debug/out/85961e84e9bd3768e1bc9bda03baf41cf0ec52b225de61d8a2df110c8adc018f_1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/weather_app/build/app/intermediates/project_dex_archive/debug/out/85961e84e9bd3768e1bc9bda03baf41cf0ec52b225de61d8a2df110c8adc018f_0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/weather_app/build/app/intermediates/project_dex_archive/debug/out/85961e84e9bd3768e1bc9bda03baf41cf0ec52b225de61d8a2df110c8adc018f_3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/weather_app/build/app/intermediates/project_dex_archive/debug/out/85961e84e9bd3768e1bc9bda03baf41cf0ec52b225de61d8a2df110c8adc018f_2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

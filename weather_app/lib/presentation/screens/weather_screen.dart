@@ -86,7 +86,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       increaseWeatherTile = !increaseWeatherTile;
                       print(increaseWeatherTile);
                     });
-                    print(increaseWeatherTile);
+                    //print(increaseWeatherTile);
                   },
                   child: WeatherDisplayTile(
                     increaseTile: increaseWeatherTile,

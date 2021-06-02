@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/presentation/widgets/customLineStroke.dart';
 import 'package:weather_app/utils/app_color.dart';
 import './customCloudySun.dart';
 
@@ -81,6 +82,20 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
                 ),
               ),
             ],
+          ),
+        ),
+        Positioned(
+          top: _size.height * 0.45,
+          right: 0.0,
+          left: 0.0,
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 200),
+            height: widget.increaseTile ? 70 : 0.0,
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: CustomPaint(
+              size: Size(300, 70),
+              painter: CustomLineStroke(),
+            ),
           ),
         ),
         AnimatedPositioned(
