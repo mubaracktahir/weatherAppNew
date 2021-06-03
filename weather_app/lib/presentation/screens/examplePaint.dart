@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/presentation/widgets/customCloudySun.dart';
 import 'package:weather_app/presentation/widgets/customLineStroke.dart';
+import 'package:weather_app/presentation/widgets/custom_background_cloud.dart';
+import 'package:weather_app/presentation/widgets/custom_line_cross.dart';
 
 class ExamplePaint extends StatelessWidget {
   @override
@@ -18,8 +20,8 @@ class ExamplePaint extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(width: 1, color: Colors.white)),
               child: CustomPaint(
-                size: Size(300, 70),
-                painter: CustomLineStroke(),
+                size: Size(100, 100),
+                painter: CustomLineCross(isSmallCross: true),
               ),
             ),
           ),

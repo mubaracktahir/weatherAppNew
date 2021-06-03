@@ -43,52 +43,54 @@ class WeatherDayTile extends StatelessWidget {
                 )
               ],
             ),
-            child: Column(
-              children: [
-                Text(
-                  this.day == null ? '' : this.day,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+            child: Container(
+              child: Column(
+                children: [
+                  Text(
+                    this.day == null ? '' : this.day,
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                Text(
-                  this.icon == null ? '' : this.icon,
-                  style: TextStyle(
-                    fontSize: 60.0,
-                    color: Colors.white,
+                  Text(
+                    this.icon == null ? '' : this.icon,
+                    style: TextStyle(
+                      fontSize: 60.0,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                Text(
-                  this.degree == null ? '' : this.degree,
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.white,
+                  Text(
+                    this.degree == null ? '' : this.degree,
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      this.minDegree == null ? '' : this.minDegree,
-                      style: TextStyle(
-                        color: Colors.grey.withOpacity(0.4),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        this.minDegree == null ? '' : this.minDegree,
+                        style: TextStyle(
+                          color: Colors.grey.withOpacity(0.4),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    Text(
-                      this.maxDegree == null ? '' : this.maxDegree,
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                )
-              ],
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        this.maxDegree == null ? '' : this.maxDegree,
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
           SizedBox(

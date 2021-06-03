@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/presentation/widgets/customLineStroke.dart';
+import 'package:weather_app/presentation/widgets/custom_line_cross.dart';
 import 'package:weather_app/utils/app_color.dart';
 import './customCloudySun.dart';
 
@@ -82,6 +83,25 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
                 ),
               ),
             ],
+          ),
+        ),
+        AnimatedPositioned(
+          duration: Duration(milliseconds: 200),
+          left: widget.increaseTile ? 0.0 : _size.width * 0.15,
+          top: widget.increaseTile ? _size.height * 0.2 : _size.height * 0.010,
+          child: CustomPaint(
+            size: Size(100, 100),
+            painter: CustomLineCross(isSmallCross: !widget.increaseTile),
+          ),
+        ),
+        AnimatedPositioned(
+          duration: Duration(milliseconds: 200),
+          bottom:
+              widget.increaseTile ? _size.height * 0.10 : _size.width * 0.15,
+          left: widget.increaseTile ? _size.width * 0.7 : _size.width * 0.05,
+          child: CustomPaint(
+            size: Size(100, 100),
+            painter: CustomLineCross(isSmallCross: !widget.increaseTile),
           ),
         ),
         Positioned(
