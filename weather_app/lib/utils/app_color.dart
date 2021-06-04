@@ -15,4 +15,5 @@ class AppColor {
   static final gradientBottom = Color(0xff008CFF);
   static final homeSunColor = Color(0xffffef69);
   static final backgroundDesign = Color(0xffbbc0d4).withOpacity(0.95);
+  static final crossIconColor = Color(0xffff0090);
 }

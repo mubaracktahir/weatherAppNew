@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/data/models/weather.dart';
+import 'package:weather_app/presentation/widgets/custom_cross_icon.dart';
 import 'package:weather_app/presentation/widgets/custom_detail_tile.dart';
 import 'package:weather_app/presentation/widgets/weather_day_tile.dart';
 
@@ -113,21 +114,24 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
           ),
           Positioned(
             left: _size.width / 2 - 25,
-            top: -15,
+            top: -25,
             child: GestureDetector(
               onTap: () {
                 //_bottomController.reverse();
                 Navigator.pop(context);
               },
               child: Container(
+                alignment: Alignment.center,
                 height: 50.0,
                 width: 50.0,
+                //padding: EdgeInsets.all(5.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(300),
                   color: Colors.white,
                 ),
-                child: Icon(
-                  Icons.cancel,
+                child: CustomPaint(
+                  size: Size(30, 30),
+                  painter: CustomCrossIcon(),
                 ),
               ),
             ),

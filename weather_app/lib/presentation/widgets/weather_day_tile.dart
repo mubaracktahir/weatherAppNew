@@ -79,7 +79,7 @@ class WeatherDayTile extends StatelessWidget {
                       Text(
                         this.minDegree == null ? '' : this.minDegree,
                         style: TextStyle(
-                          color: Colors.grey.withOpacity(0.4),
+                          color: Colors.white54,
                         ),
                       ),
                       SizedBox(
