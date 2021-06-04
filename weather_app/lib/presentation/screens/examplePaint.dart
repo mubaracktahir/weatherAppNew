@@ -17,13 +17,12 @@ class ExamplePaint extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(width: 1, color: Colors.white)),
             child: Container(
-              decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: Colors.white)),
-              child: CustomPaint(
-                size: Size(100, 100),
-                painter: CustomLineCross(isSmallCross: true),
-              ),
-            ),
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.white)),
+                child: ImageIcon(
+                  AssetImage('assets/images/icons8_sun_24px.png'),
+                  color: Colors.white,
+                )),
           ),
         ),
       ),

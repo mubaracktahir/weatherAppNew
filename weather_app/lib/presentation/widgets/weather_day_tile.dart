@@ -54,10 +54,12 @@ class WeatherDayTile extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  Text(
-                    this.icon == null ? '' : this.icon,
-                    style: TextStyle(
-                      fontSize: 60.0,
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 20.0),
+                    child: ImageIcon(
+                      AssetImage(
+                        icon == null ? '' : icon,
+                      ),
                       color: Colors.white,
                     ),
                   ),

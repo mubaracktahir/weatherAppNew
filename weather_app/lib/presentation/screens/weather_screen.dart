@@ -64,7 +64,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        padding: EdgeInsets.all(16.0) + EdgeInsets.only(top: 50.0),
+        padding: EdgeInsets.all(16.0) + EdgeInsets.only(top: 70.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +128,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               },
                               child: WeatherDayTile(
                                 day: weathers[index].day,
-                                icon: weathers[index].icon,
+                                icon: weathers[index].iconUrl,
                                 degree:
                                     '${weathers[index].humidity.toString()}°',
                                 minDegree:
@@ -176,7 +176,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
 showBottomSheet(BuildContext context) {
   showModalBottomSheet(
       isScrollControlled: true,
-      backgroundColor: Colors.green,
+      isDismissible: false,
+      backgroundColor: Colors.red,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(

@@ -89,9 +89,13 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
           duration: Duration(milliseconds: 200),
           left: widget.increaseTile ? 0.0 : _size.width * 0.15,
           top: widget.increaseTile ? _size.height * 0.2 : _size.height * 0.010,
-          child: CustomPaint(
-            size: Size(100, 100),
-            painter: CustomLineCross(isSmallCross: !widget.increaseTile),
+          child: ColorFiltered(
+            colorFilter:
+                ColorFilter.mode(Colors.transparent, BlendMode.difference),
+            child: CustomPaint(
+              size: Size(100, 100),
+              painter: CustomLineCross(isSmallCross: !widget.increaseTile),
+            ),
           ),
         ),
         AnimatedPositioned(
