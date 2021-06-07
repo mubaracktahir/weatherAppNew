@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/data/models/weather.dart';
+import 'package:weather_app/presentation/widgets/app_drawer.dart';
 import 'package:weather_app/presentation/widgets/custom_bottom_sheet_tile.dart';
 import 'package:weather_app/presentation/widgets/custom_index_indicator.dart';
 import 'package:weather_app/presentation/widgets/weather_day_tile.dart';
@@ -12,6 +13,11 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  void _openDrawer() {
+    _scaffoldKey.currentState.openDrawer();
+  }
+
   WeatherData weatherData = WeatherData();
   List<Weather> weathers;
   ScrollController _controller;
@@ -62,24 +68,34 @@ class _WeatherScreenState extends State<WeatherScreen> {
     Size _size = MediaQuery.of(context).size;
     print('${_size.height}');
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: AppDrawer(),
       backgroundColor: Colors.white,
       body: Container(
-        padding: EdgeInsets.all(16.0) + EdgeInsets.only(top: 70.0),
+        padding: EdgeInsets.all(16.0) + EdgeInsets.only(top: 30.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 20.0,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.lightbulb),
+                  GestureDetector(
+                    onTap: () {
+                      _openDrawer();
+                    },
+                    child: Icon(Icons.menu),
+                  ),
                   //Spacer(),
                   Text('ghjklnbnghjbn'),
                   Icon(Icons.search),
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(top: 30.0),
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
