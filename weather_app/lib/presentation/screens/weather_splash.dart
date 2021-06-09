@@ -190,7 +190,7 @@ class _WeatherSplashState extends State<WeatherSplash>
                 _cloudController.reverse();
                 _cloudController.addListener(() {
                   if (_cloudController.isDismissed && splashFlag != true) {
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) {
                       return WeatherScreen();
                     }));
