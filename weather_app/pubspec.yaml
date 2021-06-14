@@ -31,6 +31,8 @@ dependencies:
   drawable: ^0.1.0
   shared_preferences: ^2.0.5
   restcountries: ^0.0.3
+  http: ^0.12.2
+  geolocator: ^7.1.0
 
 dev_dependencies:
   flutter_test:

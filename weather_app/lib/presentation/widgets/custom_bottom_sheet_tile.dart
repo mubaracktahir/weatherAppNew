@@ -3,6 +3,7 @@ import 'package:weather_app/data/models/weather.dart';
 import 'package:weather_app/presentation/widgets/custom_cross_icon.dart';
 import 'package:weather_app/presentation/widgets/custom_detail_tile.dart';
 import 'package:weather_app/presentation/widgets/weather_day_tile.dart';
+import 'package:weather_app/utils/app_color.dart';
 
 class CustomButtomSheetTile extends StatefulWidget {
   @override
@@ -121,19 +122,18 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                 Navigator.pop(context);
               },
               child: Container(
-                alignment: Alignment.center,
-                height: 50.0,
-                width: 50.0,
-                //padding: EdgeInsets.all(5.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(300),
-                  color: Colors.white,
-                ),
-                child: CustomPaint(
-                  size: Size(30, 30),
-                  painter: CustomCrossIcon(),
-                ),
-              ),
+                  alignment: Alignment.center,
+                  height: 50.0,
+                  width: 50.0,
+                  //padding: EdgeInsets.all(5.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(300),
+                    color: Colors.white,
+                  ),
+                  child: Icon(
+                    Icons.close,
+                    color: AppColor.crossIconColor,
+                  )),
             ),
           ),
           Positioned.fill(
@@ -165,3 +165,7 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
     );
   }
 }
+
+// const apiKey = "e5ce4396a742a3620f294226a89898b4";
+// "http://api.openweathermap.org/data/2.5/forecast"
+//         "?q=lokoja&cnt=40&appid=e5ce4396a742a3620f294226a89898b4&units=metric"
