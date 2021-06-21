@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/data/models/weather.dart';
+import 'package:weather_app/data/repository/weather_repository.dart';
 import 'package:weather_app/presentation/widgets/app_drawer.dart';
 import 'package:weather_app/presentation/widgets/custom_bottom_sheet_tile.dart';
 import 'package:weather_app/presentation/widgets/custom_index_indicator.dart';
@@ -23,9 +24,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
   ScrollController _controller;
   int _currentIndex = 0;
   bool increaseWeatherTile = false;
+  WeatherRepository weatherRepository = WeatherRepository();
 
   @override
   void initState() {
+    print("Hello0");
+    print(weatherRepository.getWeatherData());
+
     weathers = weatherData.getWeatherData();
     _controller = ScrollController(initialScrollOffset: 0.0);
 
@@ -140,7 +145,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                showBottomSheet(context);
+                                showBottomSheet(context, weathers[index].color);
                               },
                               child: WeatherDayTile(
                                 day: weathers[index].day,
@@ -189,11 +194,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 }
 
-showBottomSheet(BuildContext context) {
+showBottomSheet(BuildContext context, Color color) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: false,
-      backgroundColor: Colors.red,
+      backgroundColor: color ?? Colors.transparent,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(

@@ -1,0 +1,1 @@
+GET http://api.openweathermap.org/data/2.5/forecast?q=lokoja&cnt=40&appid=e5ce4396a742a3620f294226a89898b4&units=metric
