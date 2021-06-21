@@ -10,14 +10,14 @@ class WeatherProvider {
   //get weather base on city name
   //api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
 
-  static Future<http.Response> FetchWeatherResponseOnCity(
+  static Future<http.Response> FetchRawWeatherResponseOnCity(
       {String cityName}) async {
     final response = await http.get(
         "https://api.openweathermap.org/data/2.5/forecast?q=$cityName&appid=${apiKey}");
     return Future<http.Response>.value(response);
   }
 
-  static Future<http.Response> FetchWeatherResponseOnLocation(
+  static Future<http.Response> FetchRawWeatherResponseOnLocation(
       {Position position}) async {
     final response = await http.get(
         "https://api.openweathermap.org/data/2.5/forecast?lat=${position.latitude}&lon=${position.longitude}&appid=${apiKey}");

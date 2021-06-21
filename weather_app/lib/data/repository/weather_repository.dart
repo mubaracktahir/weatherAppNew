@@ -22,7 +22,7 @@ class WeatherRepository {
       desiredAccuracy: LocationAccuracy.high,
     ).catchError((e) => print(e.message));
 
-    var response = await WeatherProvider.FetchWeatherResponseOnLocation(
+    var response = await WeatherProvider.FetchRawWeatherResponseOnLocation(
       position: position,
     );
 
@@ -39,8 +39,8 @@ class WeatherRepository {
   Future<List<Weather>> _handleSearchData() async {
     print("Hello5");
     List<Weather> emList;
-    var response =
-        await WeatherProvider.FetchWeatherResponseOnCity(cityName: _cityName);
+    var response = await WeatherProvider.FetchRawWeatherResponseOnCity(
+        cityName: _cityName);
     if (response.statusCode == 200) {
       //TODO HANDLE DATA ARRANGEMENT
       print(response.body);
