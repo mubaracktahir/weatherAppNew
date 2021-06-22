@@ -153,7 +153,7 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                     return CustomDetailTile(
                       weatherTime: weathers[index].time,
                       weatherIconUrl: weathers[index].filledIconUrl,
-                      weatherDegree: weathers[index].degree.toString(),
+                      weatherDegree: weathers[index].temperature.toString(),
                     );
                   },
                 ),

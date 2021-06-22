@@ -7,36 +7,43 @@ class Weather {
   final String day;
   final String iconUrl;
   final int humidity;
-  final int degree;
-  final int minDegree;
-  final int maxDegree;
+  final double temperature;
+  final double mintemperature;
+  final double maxtemperature;
+  final String description;
   final Color color;
   final String time;
   final String filledIconUrl;
+  final String city;
 
   Weather({
     this.day,
     this.iconUrl,
     this.humidity,
-    this.degree,
-    this.minDegree,
-    this.maxDegree,
+    this.temperature,
+    this.mintemperature,
+    this.maxtemperature,
+    this.description,
     this.color,
     this.time,
     this.filledIconUrl,
+    this.city,
   });
 
-  factory Weather.fromJson(Map<String, dynamic> json) {
+  factory Weather.fromJson(Map<String, dynamic> json, String cityName) {
     return Weather(
-        day: json['day'],
-        iconUrl: json['iconUrl'],
-        humidity: json['humidity'],
-        degree: json['degree'],
-        minDegree: json['minDegree'],
-        maxDegree: json['maxDegree'],
-        color: json['color'],
-        time: json['time'],
-        filledIconUrl: json['filledIconColor']);
+      day: json["dt_txt"],
+      iconUrl: json["main"]["icon"],
+      humidity: json["main"]['humidity'],
+      temperature: json["main"]["temp"],
+      mintemperature: json["main"]["temp_min"],
+      maxtemperature: json["main"]["temp_max"],
+      description: json["weather"][0]["description"],
+      color: json['color'],
+      time: json["dt_txt"],
+      filledIconUrl: json['filledIconColor'],
+      city: cityName,
+    );
   }
 }
 
@@ -47,9 +54,9 @@ class WeatherData {
         day: 'Monday',
         iconUrl: 'assets/images/icons8_sun_24px.png',
         humidity: 40,
-        degree: 20,
-        minDegree: 46,
-        maxDegree: 72,
+        temperature: 20,
+        mintemperature: 46,
+        maxtemperature: 72,
         color: AppColor.monColor,
         time: '12:00',
         filledIconUrl: 'assets/images/filled_sun.png');
@@ -58,9 +65,9 @@ class WeatherData {
         day: 'Tuesday',
         iconUrl: 'assets/images/icons8_sun_24px.png',
         humidity: 60,
-        degree: 20,
-        minDegree: 48,
-        maxDegree: 56,
+        temperature: 20,
+        mintemperature: 48,
+        maxtemperature: 56,
         color: AppColor.tueColor,
         time: '14:00',
         filledIconUrl: 'assets/images/filled_rainy_cloud.png');
@@ -69,9 +76,9 @@ class WeatherData {
         day: 'Wednesday',
         iconUrl: 'assets/images/icons8_sun_24px.png',
         humidity: 30,
-        degree: 20,
-        minDegree: 29,
-        maxDegree: 34,
+        temperature: 20,
+        mintemperature: 29,
+        maxtemperature: 34,
         color: AppColor.wedColor,
         time: '09:00',
         filledIconUrl: 'assets/images/filled_sunny_cloud.png');
@@ -80,9 +87,9 @@ class WeatherData {
         day: 'Thursday',
         iconUrl: 'assets/images/icons8_sun_24px.png',
         humidity: 37,
-        degree: 20,
-        minDegree: 12,
-        maxDegree: 18,
+        temperature: 20,
+        mintemperature: 12,
+        maxtemperature: 18,
         color: AppColor.thurColor,
         time: '20:00',
         filledIconUrl: 'assets/images/filled_storm_cloud.png');
@@ -91,9 +98,9 @@ class WeatherData {
         day: 'Friday',
         iconUrl: 'assets/images/icons8_sun_24px.png',
         humidity: 49,
-        degree: 20,
-        minDegree: 7,
-        maxDegree: 9,
+        temperature: 20,
+        mintemperature: 7,
+        maxtemperature: 9,
         color: AppColor.friColor,
         time: '13:00',
         filledIconUrl: 'assets/images/filled_sunny_cloud.png');

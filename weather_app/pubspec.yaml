@@ -33,6 +33,8 @@ dependencies:
   restcountries: ^0.0.3
   http: ^0.12.2
   geolocator: ^7.1.0
+  intl: ^0.17.0
+  flutter_bloc: ^7.0.1
 
 dev_dependencies:
   flutter_test:
