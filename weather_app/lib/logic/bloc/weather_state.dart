@@ -8,11 +8,11 @@ class WeatherLoading extends WeatherState {}
 class WeatherLoaded extends WeatherState {
   final List<Weather> weatherData;
 
-  WeatherLoaded(this.weatherData);
+  WeatherLoaded({this.weatherData});
 }
 
 class WeatherError extends WeatherState {
   final String errorMessage;
 
-  WeatherError(this.errorMessage);
+  WeatherError({this.errorMessage});
 }

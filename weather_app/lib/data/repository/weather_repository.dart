@@ -7,11 +7,12 @@ import 'package:weather_app/data/repository/cached_pref.dart';
 
 class WeatherRepository {
   String _cityName;
+  // ignore: missing_return
   Future<List<Weather>> getWeatherData({String cityName}) async {
     var storedResponse = await CachedPref.getCachedWeatherData();
     //when there is cached data
     if (storedResponse != null) {
-      this._structureWeatherData(rawWeatherData: storedResponse);
+      return this._structureWeatherData(rawWeatherData: storedResponse);
     }
     //when there is no cached data
     else {
@@ -34,6 +35,7 @@ class WeatherRepository {
     List<Weather> weatherData =
         weatherList.map<Weather>((e) => Weather.fromJson(e, cityName)).toList();
     print(weatherData[0].day);
+    print(weatherData.length);
     return weatherData;
   }
 

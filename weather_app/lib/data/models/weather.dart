@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:weather_app/utils/app_color.dart';
+import 'package:weather_app/utils/format_weather_data.dart';
 
 class Weather {
   final String day;
@@ -32,7 +33,8 @@ class Weather {
 
   factory Weather.fromJson(Map<String, dynamic> json, String cityName) {
     return Weather(
-      day: json["dt_txt"],
+      //day: json["dt_txt"],
+      day: FormatWeatherData.formatTimeStampToDay(json["dt_txt"]),
       iconUrl: json["main"]["icon"],
       humidity: json["main"]['humidity'],
       temperature: json["main"]["temp"],

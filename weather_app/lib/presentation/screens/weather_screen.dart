@@ -22,24 +22,24 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 
   WeatherData weatherData = WeatherData();
-  List<Weather> weathers;
+  //List<Weather> weathers;
   ScrollController _controller;
   int _currentIndex = 0;
   bool increaseWeatherTile = false;
   WeatherRepository weatherRepository = WeatherRepository();
 
   loadWeather() async {
-    weathers = await weatherRepository.getWeatherData();
-    print('${weathers} omom');
+    //weathers = await weatherRepository.getWeatherData();
+    //print('${weathers} omom');
   }
 
   @override
   void initState() {
     //print("Hello0");
-    print(weatherRepository.getWeatherData());
-    Future.delayed(Duration.zero, () async {
-      weathers = await weatherRepository.getWeatherData();
-    });
+    // print(weatherRepository.getWeatherData());
+    // Future.delayed(Duration.zero, () async {
+    //   weathers = await weatherRepository.getWeatherData();
+    // });
 
     //weathers = weatherData.getWeatherData();
     _controller = ScrollController(initialScrollOffset: 0.0);
@@ -91,116 +91,131 @@ class _WeatherScreenState extends State<WeatherScreen> {
         child: SingleChildScrollView(
           child: BlocBuilder<WeatherBloc, WeatherState>(
             builder: (context, state) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
+              if (state is WeatherLoading) {
+                BlocProvider.of<WeatherBloc>(context).add(LoadWeather());
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is WeatherError) {
+                return Center(
+                  child: Text('Weather Error'),
+                );
+              } else if (state is WeatherLoaded) {
+                List<Weather> weathers = state.weatherData;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            _openDrawer();
+                          },
+                          child: Icon(Icons.menu),
+                        ),
+                        //Spacer(),
+                        Text('ghjklnbnghjbn'),
+                        Icon(Icons.search),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30.0),
+                      child: GestureDetector(
                         onTap: () {
-                          _openDrawer();
+                          setState(() {
+                            increaseWeatherTile = !increaseWeatherTile;
+                            print(increaseWeatherTile);
+                          });
+                          //print(increaseWeatherTile);
                         },
-                        child: Icon(Icons.menu),
-                      ),
-                      //Spacer(),
-                      Text('ghjklnbnghjbn'),
-                      Icon(Icons.search),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          increaseWeatherTile = !increaseWeatherTile;
-                          print(increaseWeatherTile);
-                        });
-                        //print(increaseWeatherTile);
-                      },
-                      child: WeatherDisplayTile(
-                        increaseTile: increaseWeatherTile,
+                        child: WeatherDisplayTile(
+                          increaseTile: increaseWeatherTile,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Visibility(
-                    visible: !increaseWeatherTile,
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(left: 10.0, bottom: 10.0),
-                            child: Text(
-                              'NEXT 5 DAYS',
-                              style: TextStyle(
-                                //height: 1.2,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Visibility(
+                      visible: !increaseWeatherTile,
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding:
+                                  EdgeInsets.only(left: 10.0, bottom: 10.0),
+                              child: Text(
+                                'NEXT 5 DAYS',
+                                style: TextStyle(
+                                  //height: 1.2,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: _size.height * 0.29,
-                            child: ListView.builder(
-                              controller: _controller,
-                              padding: EdgeInsets.all(0.0),
-                              physics: BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: weathers?.length,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    showBottomSheet(
-                                        context, weathers[index].color);
-                                  },
-                                  child: WeatherDayTile(
-                                    day: weathers[index].day,
-                                    //icon: weathers[index].iconUrl,
-                                    degree:
-                                        '${weathers[index].humidity.toString()}°',
-                                    minDegree:
-                                        '${weathers[index].mintemperature.toString()}°',
-                                    maxDegree:
-                                        '${weathers[index].maxtemperature.toString()}°',
-                                    //color: weathers[index].color,
-                                  ),
-                                );
-                              },
+                            SizedBox(
+                              height: _size.height * 0.29,
+                              child: ListView.builder(
+                                controller: _controller,
+                                padding: EdgeInsets.all(0.0),
+                                physics: BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: weathers?.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      showBottomSheet(
+                                          context, weathers[index].color);
+                                    },
+                                    child: WeatherDayTile(
+                                      day: weathers[index].day,
+                                      //icon: weathers[index].iconUrl,
+                                      degree:
+                                          '${weathers[index].humidity.toString()}°',
+                                      minDegree:
+                                          '${weathers[index].mintemperature.toString()}°',
+                                      maxDegree:
+                                          '${weathers[index].maxtemperature.toString()}°',
+                                      color: AppColor.tueColor,
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomIndexIndicator(
-                                color: _currentIndex == 1 || _currentIndex == 0
-                                    ? AppColor.thurColor
-                                    : AppColor.fadeWhite,
-                              ),
-                              CustomIndexIndicator(
-                                color: _currentIndex == 2
-                                    ? AppColor.thurColor
-                                    : AppColor.fadeWhite,
-                              ),
-                              CustomIndexIndicator(
-                                color: _currentIndex == 3
-                                    ? AppColor.thurColor
-                                    : AppColor.fadeWhite,
-                              ),
-                            ],
-                          ),
-                        ],
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomIndexIndicator(
+                                  color:
+                                      _currentIndex == 1 || _currentIndex == 0
+                                          ? AppColor.thurColor
+                                          : AppColor.fadeWhite,
+                                ),
+                                CustomIndexIndicator(
+                                  color: _currentIndex == 2
+                                      ? AppColor.thurColor
+                                      : AppColor.fadeWhite,
+                                ),
+                                CustomIndexIndicator(
+                                  color: _currentIndex == 3
+                                      ? AppColor.thurColor
+                                      : AppColor.fadeWhite,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              );
+                  ],
+                );
+              }
+              return Container();
             },
           ),
         ),
