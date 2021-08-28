@@ -12,7 +12,7 @@ class Weather {
   final double mintemperature;
   final double maxtemperature;
   final String description;
-  final Color color;
+  Color color;
   final String time;
   final String filledIconUrl;
   final String city;

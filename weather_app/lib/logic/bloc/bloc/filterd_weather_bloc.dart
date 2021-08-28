@@ -20,7 +20,6 @@ class FilterdWeatherBloc
     WeatherRepository weatherRepository = WeatherRepository();
     if (event is FilterdLoadingWeather) {
       yield FilteredWeatherLoading();
-      //weatherRepository.getDayWeatherData();
     } else if (event is FilterdLoadedWeatherDayEvent) {
       var day = event.day;
       List<Weather> weatherList = await weatherRepository.getWeatherData();

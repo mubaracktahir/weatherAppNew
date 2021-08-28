@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app/data/models/weather.dart';
 import 'package:weather_app/data/providers/weather_provider.dart';
 import 'package:weather_app/data/repository/cached_pref.dart';
+import 'package:weather_app/utils/app_color.dart';
 
 class WeatherRepository {
   String _cityName;
@@ -30,11 +32,34 @@ class WeatherRepository {
   // ignore: missing_return
   Future<List<Weather>> _structureWeatherData({String rawWeatherData}) async {
     var decodedResponse = jsonDecode(rawWeatherData);
-
     var cityName = decodedResponse['city']['name'];
     var weatherList = decodedResponse['list'];
     List<Weather> weatherData =
         weatherList.map<Weather>((e) => Weather.fromJson(e, cityName)).toList();
+    int tracker = 0;
+    var dayTileColor = AppColor.monColor;
+    for (var i = 0; i < weatherData.length - 1; i++) {
+      weatherData[i].color = dayTileColor;
+      if (weatherData[i].day != weatherData[i + 1].day) {
+        tracker++;
+        switch (tracker) {
+          case 1:
+            dayTileColor = AppColor.tueColor;
+            break;
+          case 2:
+            dayTileColor = AppColor.wedColor;
+            break;
+          case 3:
+            dayTileColor = AppColor.thurColor;
+            break;
+          case 4:
+            dayTileColor = AppColor.friColor;
+            break;
+          default:
+            dayTileColor = AppColor.monColor;
+        }
+      }
+    }
     return weatherData;
   }
 

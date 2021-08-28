@@ -183,7 +183,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                           '${weathers[index].mintemperature.toString()}°',
                                       maxDegree:
                                           '${weathers[index].maxtemperature.toString()}°',
-                                      color: AppColor.tueColor,
+                                      color: weathers[index].color,
                                     ),
                                   );
                                 },
@@ -231,7 +231,7 @@ showSheet(BuildContext context, Color color, String day) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: false,
-      backgroundColor: Colors.pink, //color ?? Colors.transparent,
+      backgroundColor: color, //color ?? Colors.transparent,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(

@@ -17,18 +17,16 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) async* {
     // TODO: implement mapEventToState
     WeatherRepository weatherRepository = WeatherRepository();
-    if (event is LoadWeather) {
-      yield WeatherLoading();
-      List<Weather> weatherList = await weatherRepository.getWeatherData();
-      List<Weather> temp = [];
-      for (var i = 0; i < weatherList.length - 1; i++) {
-        if (weatherList[i].day != weatherList[i + 1].day) {
-          temp.add(weatherList[i]);
-        }
+    yield WeatherLoading();
+    List<Weather> weatherList = await weatherRepository.getWeatherData();
+    List<Weather> temp = [];
+    for (var i = 0; i < weatherList.length - 1; i++) {
+      if (weatherList[i].day != weatherList[i + 1].day) {
+        temp.add(weatherList[i]);
       }
-      weatherList = temp;
-
-      yield WeatherLoaded(weatherData: weatherList);
     }
+    weatherList = temp;
+
+    yield WeatherLoaded(weatherData: weatherList);
   }
 }
