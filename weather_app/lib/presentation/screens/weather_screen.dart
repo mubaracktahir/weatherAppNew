@@ -81,7 +81,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-    print('${_size.height}');
+    final bloc = BlocProvider.of<WeatherBloc>(context);
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: AppDrawer(),
@@ -128,9 +129,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         onTap: () {
                           setState(() {
                             increaseWeatherTile = !increaseWeatherTile;
-                            print(increaseWeatherTile);
                           });
-                          //print(increaseWeatherTile);
                         },
                         child: WeatherDisplayTile(
                           increaseTile: increaseWeatherTile,
@@ -169,8 +168,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
+                                      // bloc.mapEventToState(LoadFilteredWeather(
+                                      //     day: weathers[index].day));
+                                      bloc.add(LoadFilteredWeather(
+                                          day: weathers[index].day));
                                       showBottomSheet(
-                                          context, weathers[index].color);
+                                        context,
+                                        weathers[index].color,
+                                        weathers[index].day,
+                                      );
                                     },
                                     child: WeatherDayTile(
                                       day: weathers[index].day,
@@ -224,11 +230,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 }
 
-showBottomSheet(BuildContext context, Color color) {
+showBottomSheet(BuildContext context, Color color, String day) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: false,
-      backgroundColor: color ?? Colors.transparent,
+      backgroundColor: Colors.pink, //color ?? Colors.transparent,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(
@@ -242,6 +248,6 @@ showBottomSheet(BuildContext context, Color color) {
       enableDrag: false,
       context: context,
       builder: (context) {
-        return CustomButtomSheetTile();
+        return CustomButtomSheetTile(day: day);
       });
 }

@@ -47,22 +47,22 @@ class WeatherDayTile extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    this.day == null ? '' : this.day,
+                    this.day ?? '',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 20.0),
-                    child: ImageIcon(
-                      AssetImage(
-                        icon == null ? '' : icon,
-                      ),
-                      color: Colors.white,
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.symmetric(vertical: 20.0),
+                  //   child: ImageIcon(
+                  //     AssetImage(
+                  //       icon ?? '',
+                  //     ),
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
                   Text(
                     this.degree == null ? '' : this.degree,
                     style: TextStyle(

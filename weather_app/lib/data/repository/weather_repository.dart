@@ -25,26 +25,24 @@ class WeatherRepository {
     }
   }
 
+  Future<List<Weather>> getDayWeatherData({String day}) {}
+
   // ignore: missing_return
   Future<List<Weather>> _structureWeatherData({String rawWeatherData}) async {
     var decodedResponse = jsonDecode(rawWeatherData);
 
     var cityName = decodedResponse['city']['name'];
     var weatherList = decodedResponse['list'];
-    //print(weatherList[0]);
     List<Weather> weatherData =
         weatherList.map<Weather>((e) => Weather.fromJson(e, cityName)).toList();
-    print(weatherData[0].day);
-    print(weatherData.length);
     return weatherData;
   }
 
   // ignore: missing_return
   Future<List<Weather>> _handleLocationData() async {
     var storedResponse = await CachedPref.getCachedWeatherData();
-    print('${storedResponse} amaterasu');
+    //print('${storedResponse} amaterasu');
     if (storedResponse == null) {
-      print('amaterasu ');
       List<Weather> emList;
       Position position;
       position = await Geolocator.getCurrentPosition(
@@ -72,7 +70,6 @@ class WeatherRepository {
 
   // ignore: missing_return
   Future<List<Weather>> _handleSearchData() async {
-    print("Hello5");
     List<Weather> emList;
     var response = await WeatherProvider.FetchRawWeatherResponseOnCity(
         cityName: _cityName);
