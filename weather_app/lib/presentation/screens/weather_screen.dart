@@ -168,11 +168,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      // bloc.mapEventToState(LoadFilteredWeather(
-                                      //     day: weathers[index].day));
-                                      bloc.add(LoadFilteredWeather(
-                                          day: weathers[index].day));
-                                      showBottomSheet(
+                                      showSheet(
                                         context,
                                         weathers[index].color,
                                         weathers[index].day,
@@ -220,8 +216,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ),
                   ],
                 );
+              } else {
+                return Container();
               }
-              return Container();
             },
           ),
         ),
@@ -230,7 +227,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 }
 
-showBottomSheet(BuildContext context, Color color, String day) {
+showSheet(BuildContext context, Color color, String day) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: false,

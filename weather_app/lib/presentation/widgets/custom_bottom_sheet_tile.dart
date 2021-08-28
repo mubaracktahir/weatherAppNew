@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/data/models/weather.dart';
+import 'package:weather_app/logic/bloc/bloc/filterd_weather_bloc.dart';
 import 'package:weather_app/logic/bloc/weather_bloc.dart';
 import 'package:weather_app/presentation/widgets/custom_cross_icon.dart';
 import 'package:weather_app/presentation/widgets/custom_detail_tile.dart';
@@ -46,17 +47,19 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
     return Container(
       height: _size.height * 0.85,
       width: double.infinity,
-      child: BlocBuilder<WeatherBloc, WeatherState>(
+      child: BlocBuilder<FilterdWeatherBloc, FilterdWeatherState>(
         builder: (context, state) {
-          if (state is WeatherFilteredData) {
-            var weather = state.weatherDayData;
+          BlocProvider.of<FilterdWeatherBloc>(context)
+              .add(FilterdLoadedWeatherDayEvent(day: widget.day));
+          if (state is FilterdWeatherLoaded) {
+            var dayWeather = state.weatherData;
             return ScaleTransition(
               scale: _animation,
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
                   Container(
-                    height: _size.height * 0.85,
+                    //height: _size.height * 0.85,
                     width: double.infinity,
                     padding: EdgeInsets.only(top: 45.0),
                     margin: EdgeInsets.symmetric(horizontal: 12.0),
@@ -73,7 +76,7 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                     child: Column(
                       children: [
                         Text(
-                          'bankai',
+                          dayWeather.first.day,
                           style: TextStyle(
                             height: 2.0,
                             fontSize: 47.0,

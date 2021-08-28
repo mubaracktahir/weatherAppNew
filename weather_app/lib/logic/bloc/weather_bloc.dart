@@ -29,19 +29,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       weatherList = temp;
 
       yield WeatherLoaded(weatherData: weatherList);
-    } else if (event is LoadFilteredWeather) {
-      String day = event.day;
-      print(day);
-      List<Weather> weatherList = await weatherRepository.getWeatherData();
-      List<Weather> temp = [];
-      for (var i = 0; i < weatherList.length - 1; i++) {
-        if (weatherList[i].day == day) {
-          temp.add(weatherList[i]);
-        }
-      }
-      weatherList = temp;
-      print('omo${weatherList.first.city}');
-      yield WeatherFilteredData(weatherDayData: weatherList);
     }
   }
 }
