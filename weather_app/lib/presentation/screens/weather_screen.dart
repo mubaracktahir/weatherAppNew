@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/data/models/weather.dart';
 import 'package:weather_app/data/repository/weather_repository.dart';
 import 'package:weather_app/logic/bloc/weather_bloc.dart';
+import 'package:weather_app/presentation/screens/weather_search_page.dart';
 import 'package:weather_app/presentation/widgets/app_drawer.dart';
 import 'package:weather_app/presentation/widgets/custom_bottom_sheet_tile.dart';
 import 'package:weather_app/presentation/widgets/custom_index_indicator.dart';
+import 'package:weather_app/presentation/widgets/slide_route.dart';
 import 'package:weather_app/presentation/widgets/weather_day_tile.dart';
 import 'package:weather_app/presentation/widgets/weather_display_tile.dart';
 import 'package:weather_app/utils/app_color.dart';
@@ -119,8 +121,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           child: Icon(Icons.menu),
                         ),
                         //Spacer(),
-                        Text('ghjklnbnghjbn'),
-                        Icon(Icons.search),
+                        Text(weathers[0].city),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(context,
+                                SlideRoute(page: WeatherSearchScreen()));
+                          },
+                          child: Icon(Icons.search),
+                        ),
                       ],
                     ),
                     Padding(
@@ -231,7 +239,7 @@ showSheet(BuildContext context, Color color, String day) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: false,
-      backgroundColor: color, //color ?? Colors.transparent,
+      backgroundColor: color,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(

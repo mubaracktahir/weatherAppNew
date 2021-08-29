@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/logic/bloc/bloc/filterd_weather_bloc.dart';
 import 'package:weather_app/logic/bloc/weather_bloc.dart';
 import 'package:weather_app/presentation/screens/examplePaint.dart';
+import 'package:weather_app/presentation/screens/weather_search_page.dart';
 import 'package:weather_app/presentation/screens/weather_splash.dart';
 
 void main() {

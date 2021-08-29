@@ -11,7 +11,7 @@ import 'package:weather_app/utils/app_color.dart';
 class CustomButtomSheetTile extends StatefulWidget {
   final String day;
 
-  const CustomButtomSheetTile({Key key, this.day});
+  const CustomButtomSheetTile({this.day});
 
   @override
   _CustomButtomSheetTileState createState() => _CustomButtomSheetTileState();
@@ -52,7 +52,7 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
           BlocProvider.of<FilterdWeatherBloc>(context)
               .add(FilterdLoadedWeatherDayEvent(day: widget.day));
           if (state is FilterdWeatherLoaded) {
-            var dayWeather = state.weatherData;
+            var dayWeather = state.weatherData.first;
             return ScaleTransition(
               scale: _animation,
               child: Stack(
@@ -76,7 +76,7 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                     child: Column(
                       children: [
                         Text(
-                          dayWeather.first.day,
+                          dayWeather.day,
                           style: TextStyle(
                             height: 2.0,
                             fontSize: 47.0,
@@ -164,17 +164,23 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(24.0),
                         ),
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: weathers.length,
-                          itemBuilder: (context, index) {
-                            return CustomDetailTile(
-                              weatherTime: weathers[index].time,
-                              weatherIconUrl: weathers[index].filledIconUrl,
-                              weatherDegree:
-                                  weathers[index].temperature.toString(),
-                            );
-                          },
+                        child: ScrollConfiguration(
+                          behavior: ScrollBehavior(),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(24.0),
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: weathers.length,
+                              itemBuilder: (context, index) {
+                                return CustomDetailTile(
+                                  weatherTime: dayWeather.time,
+                                  weatherIconUrl: weathers[index].filledIconUrl,
+                                  weatherDegree:
+                                      dayWeather.temperature.toString(),
+                                );
+                              },
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -183,11 +189,7 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
               ),
             );
           }
-          return Container(
-            child: Center(
-              child: Text('Amaterasu'),
-            ),
-          );
+          return Container();
         },
       ),
     );

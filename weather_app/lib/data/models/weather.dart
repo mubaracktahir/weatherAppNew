@@ -42,7 +42,7 @@ class Weather {
       maxtemperature: json["main"]["temp_max"],
       description: json["weather"][0]["description"],
       color: json['color'],
-      time: json["dt_txt"],
+      time: FormatWeatherData.fromTimeStampToHour(json["dt_txt"]),
       filledIconUrl: json['filledIconColor'],
       city: cityName,
     );
