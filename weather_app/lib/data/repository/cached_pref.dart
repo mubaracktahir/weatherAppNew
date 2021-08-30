@@ -18,4 +18,9 @@ class CachedPref {
     }
     return data;
   }
+
+  static Future<bool> clearCachedData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.remove(cachedKey);
+  }
 }

@@ -52,31 +52,20 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
           BlocProvider.of<FilterdWeatherBloc>(context)
               .add(FilterdLoadedWeatherDayEvent(day: widget.day));
           if (state is FilterdWeatherLoaded) {
-            var dayWeather = state.weatherData.first;
+            var dayWeather = state.weatherData;
             return ScaleTransition(
               scale: _animation,
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
                   Container(
-                    //height: _size.height * 0.85,
                     width: double.infinity,
                     padding: EdgeInsets.only(top: 45.0),
                     margin: EdgeInsets.symmetric(horizontal: 12.0),
-                    // decoration: BoxDecoration(
-                    //   boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.green,
-                    //     offset: Offset(8, 8),
-                    //     blurRadius: 3.0,
-                    //     //spreadRadius: 1.0,
-                    //   )
-                    // ]
-                    // ),
                     child: Column(
                       children: [
                         Text(
-                          dayWeather.day,
+                          dayWeather.first.day,
                           style: TextStyle(
                             height: 2.0,
                             fontSize: 47.0,
@@ -134,14 +123,12 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                     top: -25,
                     child: GestureDetector(
                       onTap: () {
-                        //_bottomController.reverse();
                         Navigator.pop(context);
                       },
                       child: Container(
                         alignment: Alignment.center,
                         height: 50.0,
                         width: 50.0,
-                        //padding: EdgeInsets.all(5.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(300),
                           color: Colors.white,
@@ -170,13 +157,13 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                             borderRadius: BorderRadius.circular(24.0),
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: weathers.length,
+                              itemCount: dayWeather.length,
                               itemBuilder: (context, index) {
                                 return CustomDetailTile(
-                                  weatherTime: dayWeather.time,
+                                  weatherTime: dayWeather[index].time,
                                   weatherIconUrl: weathers[index].filledIconUrl,
                                   weatherDegree:
-                                      dayWeather.temperature.toString(),
+                                      dayWeather[index].temperature.toString(),
                                 );
                               },
                             ),
