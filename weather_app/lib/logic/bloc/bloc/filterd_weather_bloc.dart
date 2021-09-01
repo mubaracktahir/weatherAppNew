@@ -16,7 +16,6 @@ class FilterdWeatherBloc
   Stream<FilterdWeatherState> mapEventToState(
     FilterdWeatherEvent event,
   ) async* {
-    // TODO: implement mapEventToState
     WeatherRepository weatherRepository = WeatherRepository();
     if (event is FilterdLoadingWeather) {
       yield FilteredWeatherLoading();

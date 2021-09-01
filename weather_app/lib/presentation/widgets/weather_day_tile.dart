@@ -63,6 +63,7 @@ class WeatherDayTile extends StatelessWidget {
                   //     color: Colors.white,
                   //   ),
                   // ),
+                  Image.network(this.icon),
                   Text(
                     this.degree == null ? '' : this.degree,
                     style: TextStyle(

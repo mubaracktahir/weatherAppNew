@@ -15,7 +15,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   Stream<WeatherState> mapEventToState(
     WeatherEvent event,
   ) async* {
-    // TODO: implement mapEventToState
     WeatherRepository weatherRepository = WeatherRepository();
     yield WeatherLoading();
     List<Weather> weatherList = await weatherRepository.getWeatherData();

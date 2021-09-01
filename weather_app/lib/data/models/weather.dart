@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:weather_app/data/models/weather_item.dart';
 import 'package:weather_app/utils/app_color.dart';
 import 'package:weather_app/utils/format_weather_data.dart';
 
@@ -16,6 +17,7 @@ class Weather {
   final String time;
   final String filledIconUrl;
   final String city;
+  List<Item> item;
 
   Weather({
     this.day,
@@ -29,17 +31,23 @@ class Weather {
     this.time,
     this.filledIconUrl,
     this.city,
+    this.item,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json, String cityName) {
+    var _temp = json['main']['temp'];
+    var _mintemperature = json["main"]["temp_min"];
+    var _maxtemperature = json["main"]["temp_max"];
+    var icon_url = "http://openweathermap.org/img/w/" +
+        json["weather"][0]["icon"] +
+        ".png";
     return Weather(
-      //day: json["dt_txt"],
       day: FormatWeatherData.formatTimeStampToDay(json["dt_txt"]),
-      iconUrl: json["main"]["icon"],
+      iconUrl: icon_url,
       humidity: json["main"]['humidity'],
-      temperature: json["main"]["temp"],
-      mintemperature: json["main"]["temp_min"],
-      maxtemperature: json["main"]["temp_max"],
+      temperature: _temp.toDouble(),
+      mintemperature: _mintemperature.toDouble(),
+      maxtemperature: _maxtemperature.toDouble(),
       description: json["weather"][0]["description"],
       color: json['color'],
       time: FormatWeatherData.fromTimeStampToHour(json["dt_txt"]),

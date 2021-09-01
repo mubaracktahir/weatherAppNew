@@ -194,7 +194,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                       },
                                       child: WeatherDayTile(
                                         day: weathers[index].day,
-                                        //icon: weathers[index].iconUrl,
+                                        icon: weathers[index].iconUrl,
                                         degree:
                                             '${weathers[index].humidity.toString()}°',
                                         minDegree:
