@@ -5,9 +5,12 @@ import 'package:weather_app/utils/app_color.dart';
 import './customCloudySun.dart';
 
 class WeatherDisplayTile extends StatefulWidget {
+  final int humidity;
+  final String description;
   final bool increaseTile;
 
-  const WeatherDisplayTile({Key key, this.increaseTile}) : super(key: key);
+  const WeatherDisplayTile(
+      {this.humidity, this.description, this.increaseTile});
 
   @override
   _WeatherDisplayTileState createState() => _WeatherDisplayTileState();
@@ -57,7 +60,7 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
                 ),
               ),
               Text(
-                'Clouds & Sun',
+                widget.description,
                 style: TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.normal,
@@ -75,7 +78,7 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
                 ),
               ),
               Text(
-                '34°',
+                '${widget.humidity} °',
                 style: TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,

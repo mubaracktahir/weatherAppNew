@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/data/repository/cached_pref.dart';
+import 'package:weather_app/logic/bloc/weather_bloc/weather_bloc.dart';
 
 class WeatherSearchScreen extends StatefulWidget {
   @override
@@ -11,6 +14,8 @@ class _WeatherSearchScreenState extends State<WeatherSearchScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final bloc = BlocProvider.of<WeatherBloc>(context);
+
     return Scaffold(
       body: Container(
           padding: EdgeInsets.all(16.0) + EdgeInsets.only(top: 30.0),
@@ -28,7 +33,11 @@ class _WeatherSearchScreenState extends State<WeatherSearchScreen> {
                   children: [
                     GestureDetector(
                       child: Icon(Icons.search),
-                      onTap: () {},
+                      onTap: () async {
+                        await CachedPref.clearCachedData();
+                        bloc.add(LoadWeather(cityName: editingController.text));
+                        Navigator.of(context).pop();
+                      },
                     ),
                     Expanded(
                       child: TextField(
@@ -47,6 +56,11 @@ class _WeatherSearchScreenState extends State<WeatherSearchScreen> {
                               showCancelButton = false;
                             });
                           }
+                        },
+                        onSubmitted: (val) async {
+                          await CachedPref.clearCachedData();
+                          bloc.add(LoadWeather(cityName: val));
+                          Navigator.of(context).pop();
                         },
                       ),
                     ),

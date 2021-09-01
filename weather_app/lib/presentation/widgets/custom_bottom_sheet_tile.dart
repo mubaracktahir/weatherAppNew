@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/data/models/weather.dart';
-import 'package:weather_app/logic/bloc/bloc/filterd_weather_bloc.dart';
-import 'package:weather_app/logic/bloc/weather_bloc.dart';
-import 'package:weather_app/presentation/widgets/custom_cross_icon.dart';
+import 'package:weather_app/logic/bloc/filtered_weather_bloc/filterd_weather_bloc.dart';
 import 'package:weather_app/presentation/widgets/custom_detail_tile.dart';
-import 'package:weather_app/presentation/widgets/weather_day_tile.dart';
 import 'package:weather_app/utils/app_color.dart';
 
 class CustomButtomSheetTile extends StatefulWidget {

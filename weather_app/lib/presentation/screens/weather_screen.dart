@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/data/models/weather.dart';
 import 'package:weather_app/data/repository/cached_pref.dart';
 import 'package:weather_app/data/repository/weather_repository.dart';
-import 'package:weather_app/logic/bloc/weather_bloc.dart';
+import 'package:weather_app/logic/bloc/weather_bloc/weather_bloc.dart';
 import 'package:weather_app/presentation/screens/weather_search_page.dart';
 import 'package:weather_app/presentation/widgets/app_drawer.dart';
 import 'package:weather_app/presentation/widgets/custom_bottom_sheet_tile.dart';
@@ -150,6 +150,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             });
                           },
                           child: WeatherDisplayTile(
+                            humidity: weathers[0].humidity,
+                            description: weathers[0].description,
                             increaseTile: increaseWeatherTile,
                           ),
                         ),

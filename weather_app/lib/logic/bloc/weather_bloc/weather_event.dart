@@ -8,8 +8,3 @@ class LoadWeather extends WeatherEvent {
 
   LoadWeather({this.cityName});
 }
-
-class LoadFilteredWeather extends WeatherEvent {
-  final String day;
-  LoadFilteredWeather({this.day});
-}
