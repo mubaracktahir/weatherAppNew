@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/logic/bloc/internet_bloc/internet_bloc.dart';
 import 'package:weather_app/logic/bloc/weather_bloc/weather_bloc.dart';
+import 'package:weather_app/presentation/screens/examplePaint.dart';
 import 'package:weather_app/presentation/screens/weather_splash.dart';
 import 'logic/bloc/filtered_weather_bloc/filterd_weather_bloc.dart';
 
@@ -19,6 +21,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<FilterdWeatherBloc>(
           create: (context) => FilterdWeatherBloc(),
+        ),
+        BlocProvider<InternetBloc>(
+          create: (context) => InternetBloc(),
         )
       ],
       child: MaterialApp(
@@ -54,8 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
@@ -76,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

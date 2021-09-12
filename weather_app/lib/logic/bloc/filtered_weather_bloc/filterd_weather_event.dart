@@ -7,6 +7,7 @@ class FilterdLoadingWeather extends FilterdWeatherEvent {}
 
 class FilterdLoadedWeatherDayEvent extends FilterdWeatherEvent {
   final String day;
+  final IconData icon;
 
-  FilterdLoadedWeatherDayEvent({this.day});
+  FilterdLoadedWeatherDayEvent({this.day, this.icon});
 }

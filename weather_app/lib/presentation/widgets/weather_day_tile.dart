@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/presentation/widgets/custom_bottom_sheet_tile.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class WeatherDayTile extends StatelessWidget {
   final String day;
-  final String icon;
+  final IconData icon;
   final String degree;
   final String minDegree;
   final String maxDegree;
@@ -45,6 +46,7 @@ class WeatherDayTile extends StatelessWidget {
             ),
             child: Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
                     this.day ?? '',
@@ -63,7 +65,11 @@ class WeatherDayTile extends StatelessWidget {
                   //     color: Colors.white,
                   //   ),
                   // ),
-                  Image.network(this.icon),
+                  BoxedIcon(
+                    icon,
+                    color: Colors.white,
+                    size: 30,
+                  ),
                   Text(
                     this.degree == null ? '' : this.degree,
                     style: TextStyle(
@@ -91,6 +97,9 @@ class WeatherDayTile extends StatelessWidget {
                         style: TextStyle(color: Colors.white),
                       )
                     ],
+                  ),
+                  SizedBox(
+                    height: 10.0,
                   )
                 ],
               ),

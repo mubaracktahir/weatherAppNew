@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:weather_app/data/models/weather.dart';
 import 'package:weather_app/data/repository/weather_repository.dart';
@@ -29,7 +30,7 @@ class FilterdWeatherBloc
         }
       }
       weatherList = temp;
-      yield FilterdWeatherLoaded(weatherData: weatherList);
+      yield FilterdWeatherLoaded(weatherData: weatherList, icon: event.icon);
     }
   }
 }

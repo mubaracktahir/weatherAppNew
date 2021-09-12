@@ -33,6 +33,7 @@ class WeatherRepository {
     var weatherData = decodedResponse['list'];
     List<Weather> weatherList =
         weatherData.map<Weather>((e) => Weather.fromJson(e, cityName)).toList();
+
     return FormatWeatherData.asignColorsToData(weatherList: weatherList);
   }
 

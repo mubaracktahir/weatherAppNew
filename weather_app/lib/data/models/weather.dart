@@ -1,11 +1,13 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:weather_app/data/models/weather_item.dart';
 import 'package:weather_app/utils/app_color.dart';
 import 'package:weather_app/utils/format_weather_data.dart';
 
 class Weather {
+  final int id;
   final String day;
   final String iconUrl;
   final int humidity;
@@ -18,8 +20,10 @@ class Weather {
   final String filledIconUrl;
   final String city;
   List<Item> item;
+  IconData icon;
 
   Weather({
+    this.id,
     this.day,
     this.iconUrl,
     this.humidity,
@@ -32,6 +36,7 @@ class Weather {
     this.filledIconUrl,
     this.city,
     this.item,
+    this.icon,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json, String cityName) {
@@ -42,6 +47,7 @@ class Weather {
         json["weather"][0]["icon"] +
         ".png";
     return Weather(
+      id: json["weather"][0]["id"],
       day: FormatWeatherData.formatTimeStampToDay(json["dt_txt"]),
       iconUrl: icon_url,
       humidity: json["main"]['humidity'],

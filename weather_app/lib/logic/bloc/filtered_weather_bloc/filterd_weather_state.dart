@@ -7,6 +7,7 @@ class FilteredWeatherLoading extends FilterdWeatherState {}
 
 class FilterdWeatherLoaded extends FilterdWeatherState {
   final List<Weather> weatherData;
+  final IconData icon;
 
-  FilterdWeatherLoaded({this.weatherData});
+  FilterdWeatherLoaded({this.weatherData, this.icon});
 }

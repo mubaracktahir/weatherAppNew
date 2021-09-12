@@ -4,6 +4,7 @@ import 'package:weather_app/data/models/weather.dart';
 import 'package:weather_app/logic/bloc/filtered_weather_bloc/filterd_weather_bloc.dart';
 import 'package:weather_app/presentation/widgets/custom_detail_tile.dart';
 import 'package:weather_app/utils/app_color.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class CustomButtomSheetTile extends StatefulWidget {
   final String day;
@@ -46,8 +47,8 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
       width: double.infinity,
       child: BlocBuilder<FilterdWeatherBloc, FilterdWeatherState>(
         builder: (context, state) {
-          BlocProvider.of<FilterdWeatherBloc>(context)
-              .add(FilterdLoadedWeatherDayEvent(day: widget.day));
+          // BlocProvider.of<FilterdWeatherBloc>(context)
+          //     .add(FilterdLoadedWeatherDayEvent(day: widget.day));
           if (state is FilterdWeatherLoaded) {
             var dayWeather = state.weatherData;
             return ScaleTransition(
@@ -70,13 +71,10 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                             color: Colors.white,
                           ),
                         ),
-                        Text(
-                          '☼',
-                          style: TextStyle(
-                            fontSize: 100.0,
-                            height: 1,
-                            color: Colors.white,
-                          ),
+                        BoxedIcon(
+                          state.icon,
+                          size: 100,
+                          color: Colors.white,
                         ),
                         Text(
                           '23°',

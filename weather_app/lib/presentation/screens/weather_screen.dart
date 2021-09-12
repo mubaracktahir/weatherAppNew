@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/data/models/weather.dart';
 import 'package:weather_app/data/repository/cached_pref.dart';
 import 'package:weather_app/data/repository/weather_repository.dart';
+import 'package:weather_app/logic/bloc/filtered_weather_bloc/filterd_weather_bloc.dart';
 import 'package:weather_app/logic/bloc/weather_bloc/weather_bloc.dart';
 import 'package:weather_app/presentation/screens/weather_search_page.dart';
 import 'package:weather_app/presentation/widgets/app_drawer.dart';
@@ -188,6 +189,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
                                       onTap: () {
+                                        BlocProvider.of<FilterdWeatherBloc>(
+                                                context)
+                                            .add(FilterdLoadedWeatherDayEvent(
+                                          day: weathers[index].day,
+                                          icon: weathers[index].icon,
+                                        ));
                                         showSheet(
                                           context,
                                           weathers[index].color,
@@ -196,7 +203,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                       },
                                       child: WeatherDayTile(
                                         day: weathers[index].day,
-                                        icon: weathers[index].iconUrl,
+                                        icon: weathers[index].icon,
                                         degree:
                                             '${weathers[index].humidity.toString()}°',
                                         minDegree:
