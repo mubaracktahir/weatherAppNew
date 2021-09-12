@@ -19,6 +19,7 @@ class Weather {
   final String time;
   final String filledIconUrl;
   final String city;
+  String date;
   List<Item> item;
   IconData icon;
 
@@ -35,6 +36,7 @@ class Weather {
     this.time,
     this.filledIconUrl,
     this.city,
+    this.date,
     this.item,
     this.icon,
   });
@@ -58,6 +60,7 @@ class Weather {
       color: json['color'],
       time: FormatWeatherData.fromTimeStampToHour(json["dt_txt"]),
       filledIconUrl: json['filledIconColor'],
+      date: json["dt_txt"],
       city: cityName,
     );
   }

@@ -7,10 +7,6 @@ import 'package:weather_app/utils/app_color.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 class CustomButtomSheetTile extends StatefulWidget {
-  final String day;
-
-  const CustomButtomSheetTile({this.day});
-
   @override
   _CustomButtomSheetTileState createState() => _CustomButtomSheetTileState();
 }
@@ -156,7 +152,7 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                               itemBuilder: (context, index) {
                                 return CustomDetailTile(
                                   weatherTime: dayWeather[index].time,
-                                  weatherIconUrl: weathers[0].filledIconUrl,
+                                  weatherIcon: dayWeather[index].icon,
                                   weatherDegree:
                                       dayWeather[index].temperature.toString(),
                                 );

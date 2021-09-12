@@ -86,6 +86,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     final bloc = BlocProvider.of<WeatherBloc>(context);
+    final filterdBloc = BlocProvider.of<FilterdWeatherBloc>(context);
 
     return Scaffold(
       key: _scaffoldKey,
@@ -189,8 +190,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
                                       onTap: () {
-                                        BlocProvider.of<FilterdWeatherBloc>(
-                                                context)
+                                        filterdBloc
                                             .add(FilterdLoadedWeatherDayEvent(
                                           day: weathers[index].day,
                                           icon: weathers[index].icon,
@@ -198,7 +198,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                         showSheet(
                                           context,
                                           weathers[index].color,
-                                          weathers[index].day,
                                         );
                                       },
                                       child: WeatherDayTile(
@@ -255,7 +254,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 }
 
-showSheet(BuildContext context, Color color, String day) {
+showSheet(BuildContext context, Color color) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: false,
@@ -273,6 +272,6 @@ showSheet(BuildContext context, Color color, String day) {
       enableDrag: false,
       context: context,
       builder: (context) {
-        return CustomButtomSheetTile(day: day);
+        return CustomButtomSheetTile();
       });
 }

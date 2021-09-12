@@ -35,7 +35,14 @@ class FormatWeatherData {
       } else if (weatherList[i].id > 700 && weatherList[i].id < 800) {
         weatherList[i].icon = WeatherIcons.dust;
       } else if (weatherList[i].id == 800) {
-        weatherList[i].icon = WeatherIcons.day_sunny;
+        DateTime dateTime = DateTime.parse(weatherList[i].date);
+        int hour = dateTime.hour;
+
+        if (hour < 16 && hour > 6) {
+          weatherList[i].icon = WeatherIcons.day_sunny;
+        } else {
+          weatherList[i].icon = WeatherIcons.night_clear;
+        }
       } else if (weatherList[i].id == 801) {
         weatherList[i].icon = WeatherIcons.day_cloudy;
       } else if (weatherList[i].id == 802) {
