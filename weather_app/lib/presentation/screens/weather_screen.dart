@@ -197,6 +197,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                           icon: weathers[index].icon,
                                           temperature:
                                               weathers[index].temperature,
+                                          windDegree:
+                                              weathers[index].windDegree,
                                         ));
                                         showSheet(
                                           context,

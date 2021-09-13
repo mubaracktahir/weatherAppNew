@@ -89,32 +89,11 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                             )
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '52°',
-                              style: TextStyle(
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
-                                height: 2,
-                                color: Colors.white54,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 35.0,
-                            ),
-                            Text(
-                              '67°',
-                              style: TextStyle(
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
-                                height: 2,
-                                color: Colors.white,
-                              ),
-                            )
-                          ],
-                        )
+                        WindIcon(
+                          degree: state.windDegree,
+                          color: Colors.white,
+                          size: 50,
+                        ),
                       ],
                     ),
                   ),

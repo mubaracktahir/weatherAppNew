@@ -19,6 +19,7 @@ class Weather {
   final String time;
   final String filledIconUrl;
   final String city;
+  final windDegree;
   String date;
   List<Item> item;
   IconData icon;
@@ -37,6 +38,7 @@ class Weather {
     this.time,
     this.filledIconUrl,
     this.city,
+    this.windDegree,
     this.date,
     this.item,
     this.icon,
@@ -65,6 +67,7 @@ class Weather {
       date: json["dt_txt"],
       city: cityName,
       dateTime: FormatWeatherData.fromTimeStampToDateTime(json["dt_txt"]),
+      windDegree: json["wind"]["deg"],
     );
   }
 }

@@ -14,8 +14,6 @@ class FormatWeatherData {
 
   static DateTime fromTimeStampToDateTime(String timeStamp) {
     DateTime dateTime = DateTime.parse(timeStamp);
-
-    print("bankai ${dateTime.hour}");
     return dateTime;
   }
 
