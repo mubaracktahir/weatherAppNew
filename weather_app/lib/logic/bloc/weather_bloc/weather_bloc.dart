@@ -25,6 +25,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       weatherList = await weatherRepository.getWeatherData();
     }
 
+    yield WeatherLoaded(weatherData: _refactorWeatherData(weatherList));
+  }
+
+  List<Weather> _refactorWeatherData(List<Weather> weatherList) {
     List<Weather> tempList = [];
     for (var i = 0; i < weatherList.length - 1; i++) {
       var hour = weatherList[i].dateTime.hour;
@@ -43,6 +47,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         tempList.add(weatherList[i]);
       } else if (hour >= 18 && hour < 21) {
         tempList.add(weatherList[i]);
+      } else {
+        tempList.add(weatherList[i]);
       }
     }
 
@@ -55,7 +61,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       }
     }
     weatherList = temp;
-
-    yield WeatherLoaded(weatherData: weatherList);
+    return weatherList;
   }
 }

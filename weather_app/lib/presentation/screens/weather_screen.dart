@@ -13,6 +13,7 @@ import 'package:weather_app/presentation/widgets/slide_route.dart';
 import 'package:weather_app/presentation/widgets/weather_day_tile.dart';
 import 'package:weather_app/presentation/widgets/weather_display_tile.dart';
 import 'package:weather_app/utils/app_color.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class WeatherScreen extends StatefulWidget {
   @override
@@ -105,8 +106,24 @@ class _WeatherScreenState extends State<WeatherScreen> {
               builder: (context, state) {
                 if (state is WeatherLoading) {
                   BlocProvider.of<WeatherBloc>(context).add(LoadWeather());
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: (_size.height * 0.5) - 25,
+                      ),
+                      Text(
+                        'Loading',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Quicksand',
+                        ),
+                      ),
+                      Center(
+                        child: SpinKitThreeBounce(
+                          color: AppColor.gradientBottom,
+                        ),
+                      ),
+                    ],
                   );
                 } else if (state is WeatherError) {
                   return Center(
@@ -129,7 +146,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             },
                             child: Icon(Icons.menu),
                           ),
-                          Text(weathers[0].city),
+                          Text(
+                            weathers[0].city,
+                            style: TextStyle(
+                              color: AppColor.deepBlue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              letterSpacing: 1.0,
+                            ),
+                          ),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(

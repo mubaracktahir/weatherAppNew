@@ -41,6 +41,9 @@ class _WeatherSearchScreenState extends State<WeatherSearchScreen> {
                     ),
                     Expanded(
                       child: TextField(
+                        style: TextStyle(
+                          fontFamily: 'Rajdhani',
+                        ),
                         controller: editingController,
                         decoration: InputDecoration(
                           hintText: 'Start typing to find your location',

@@ -8,3 +8,9 @@ class LoadWeather extends WeatherEvent {
 
   LoadWeather({this.cityName});
 }
+
+class ReLoadWeather extends WeatherEvent {
+  final String cityName;
+
+  ReLoadWeather({this.cityName});
+}

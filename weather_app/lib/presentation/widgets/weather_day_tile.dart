@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/presentation/widgets/custom_bottom_sheet_tile.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 class WeatherDayTile extends StatelessWidget {
@@ -38,10 +37,9 @@ class WeatherDayTile extends StatelessWidget {
                   color: this.color == null
                       ? Colors.black26
                       : this.color.withOpacity(0.4),
-                  offset: Offset(8, 8),
+                  offset: Offset(6, 6),
                   blurRadius: 3.0,
-                  //spreadRadius: 1.0,
-                )
+                ),
               ],
             ),
             child: Container(
@@ -56,15 +54,6 @@ class WeatherDayTile extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  // Container(
-                  //   margin: EdgeInsets.symmetric(vertical: 20.0),
-                  //   child: ImageIcon(
-                  //     AssetImage(
-                  //       icon ?? '',
-                  //     ),
-                  //     color: Colors.white,
-                  //   ),
-                  // ),
                   BoxedIcon(
                     icon,
                     color: Colors.white,

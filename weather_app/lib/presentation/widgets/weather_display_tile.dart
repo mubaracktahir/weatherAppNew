@@ -44,7 +44,7 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
             borderRadius: BorderRadius.circular(30.0),
             color: AppColor.gradientTop,
           ),
-          duration: Duration(milliseconds: 200),
+          duration: Duration(milliseconds: 300),
         ),
         Container(
           alignment: Alignment.center,
@@ -54,8 +54,9 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
               Text(
                 "${widget.temperature.round()}°",
                 style: TextStyle(
-                  fontSize: 130.0,
-                  fontWeight: FontWeight.w400,
+                  fontSize: 110.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Rajdhani',
                   color: Colors.white,
                 ),
               ),
@@ -65,6 +66,7 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
                   fontSize: 30.0,
                   fontWeight: FontWeight.normal,
                   color: Colors.white,
+                  fontFamily: 'Quicksand',
                 ),
               ),
               Text(
@@ -73,22 +75,26 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
+                  fontFamily: 'Rajdhani',
                   height: 1.7,
                 ),
               ),
-              Text(
-                '${widget.humidity}',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey.shade300,
+              Opacity(
+                opacity: 0.5,
+                child: Text(
+                  '${widget.humidity}',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey.shade300,
+                  ),
                 ),
               ),
             ],
           ),
         ),
         AnimatedPositioned(
-          duration: Duration(milliseconds: 200),
+          duration: Duration(milliseconds: 300),
           left: widget.increaseTile ? 0.0 : _size.width * 0.15,
           top: widget.increaseTile ? _size.height * 0.2 : _size.height * 0.010,
           child: ColorFiltered(
@@ -101,7 +107,7 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
           ),
         ),
         AnimatedPositioned(
-          duration: Duration(milliseconds: 200),
+          duration: Duration(milliseconds: 300),
           bottom:
               widget.increaseTile ? _size.height * 0.10 : _size.width * 0.15,
           left: widget.increaseTile ? _size.width * 0.7 : _size.width * 0.05,
@@ -115,7 +121,7 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
           right: 0.0,
           left: 0.0,
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 200),
+            duration: Duration(milliseconds: 300),
             height: widget.increaseTile ? 70 : 0.0,
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: CustomPaint(
@@ -125,7 +131,7 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
           ),
         ),
         AnimatedPositioned(
-          duration: Duration(milliseconds: 200),
+          duration: Duration(milliseconds: 300),
           bottom: widget.increaseTile
               ? -_size.width * 0.5 * 0.3
               : -_size.width * 0.5 * 0.3,

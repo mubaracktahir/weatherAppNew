@@ -134,21 +134,18 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                           behavior: ScrollBehavior(),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(24.0),
-                            child: Align(
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: dayWeather.length,
-                                itemBuilder: (context, index) {
-                                  return CustomDetailTile(
-                                    weatherTime: dayWeather[index].time,
-                                    weatherIcon: dayWeather[index].icon,
-                                    weatherDegree: dayWeather[index]
-                                        .temperature
-                                        .toString(),
-                                  );
-                                },
-                              ),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: dayWeather.length,
+                              itemBuilder: (context, index) {
+                                return CustomDetailTile(
+                                  weatherTime: dayWeather[index].time,
+                                  weatherIcon: dayWeather[index].icon,
+                                  weatherDegree:
+                                      "${dayWeather[index].temperature.round()}°",
+                                );
+                              },
                             ),
                           ),
                         ),
@@ -165,7 +162,3 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
     );
   }
 }
-
-// const apiKey = "e5ce4396a742a3620f294226a89898b4";
-// "http://api.openweathermap.org/data/2.5/forecast"
-//         "?q=lokoja&cnt=40&appid=e5ce4396a742a3620f294226a89898b4&units=metric"
