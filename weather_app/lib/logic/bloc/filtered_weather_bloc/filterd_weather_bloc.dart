@@ -30,7 +30,10 @@ class FilterdWeatherBloc
         }
       }
       weatherList = temp;
-      yield FilterdWeatherLoaded(weatherData: weatherList, icon: event.icon);
+      yield FilterdWeatherLoaded(
+          weatherData: weatherList,
+          icon: event.icon,
+          temperature: event.temperature);
     }
   }
 }

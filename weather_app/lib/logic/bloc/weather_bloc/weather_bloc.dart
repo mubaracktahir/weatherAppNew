@@ -25,9 +25,36 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       weatherList = await weatherRepository.getWeatherData();
     }
 
+    List<Weather> tempList = [];
+    for (var i = 0; i < weatherList.length - 1; i++) {
+      //TODO make weather to display according to current time
+      DateTime dateTime = DateTime.parse(weatherList[i].date);
+      print('shikai ${weatherList[i].dateTime}');
+      var hour = weatherList[i].dateTime.hour;
+
+      if (hour >= 0 && hour < 3) {
+        tempList.add(weatherList[i]);
+      } else if (hour >= 3 && hour < 6) {
+        tempList.add(weatherList[i]);
+      } else if (hour >= 6 && hour < 9) {
+        tempList.add(weatherList[i]);
+      } else if (hour >= 9 && hour < 12) {
+        tempList.add(weatherList[i]);
+      } else if (hour >= 12 && hour < 15) {
+        tempList.add(weatherList[i]);
+      } else if (hour >= 15 && hour < 18) {
+        tempList.add(weatherList[i]);
+      } else if (hour >= 18 && hour < 21) {
+        tempList.add(weatherList[i]);
+      }
+    }
+
+    weatherList = tempList;
+
     List<Weather> temp = [];
     for (var i = 0; i < weatherList.length - 1; i++) {
       if (weatherList[i].day != weatherList[i + 1].day) {
+        print('shikai ${weatherList[i].time}');
         temp.add(weatherList[i]);
       }
     }

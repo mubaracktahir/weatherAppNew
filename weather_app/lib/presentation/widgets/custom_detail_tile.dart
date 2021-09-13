@@ -19,11 +19,6 @@ class CustomDetailTile extends StatelessWidget {
         children: [
           Text(weatherTime),
           BoxedIcon(weatherIcon),
-          // Image.asset(
-          //   weatherIconUrl,
-          //   width: 50,
-          //   height: 50.0,
-          // ),
           Text(weatherDegree),
         ],
       ),

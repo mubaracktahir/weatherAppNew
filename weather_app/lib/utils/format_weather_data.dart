@@ -12,6 +12,13 @@ class FormatWeatherData {
     return dateFormat.format(dateTime);
   }
 
+  static DateTime fromTimeStampToDateTime(String timeStamp) {
+    DateTime dateTime = DateTime.parse(timeStamp);
+
+    print("bankai ${dateTime.hour}");
+    return dateTime;
+  }
+
   static String fromTimeStampToHour(String timeStamp) {
     DateTime dateTime = DateTime.parse(timeStamp);
     DateFormat dateFormate = DateFormat(DateFormat.HOUR24_MINUTE);
@@ -50,30 +57,6 @@ class FormatWeatherData {
       } else if (weatherList[i].id >= 803) {
         weatherList[i].icon = WeatherIcons.cloudy;
       }
-
-      // switch (weatherList[i].id) {
-      //   case 200:
-      //     weatherList[i].icon = WeatherIcons.thunderstorm;
-      //     break;
-      //   case 300:
-      //     weatherList[i].icon = WeatherIcons.raindrops;
-      //     break;
-      //   case 500:
-      //     weatherList[i].icon = WeatherIcons.rain_mix;
-      //     break;
-      //   case 600:
-      //     weatherList[i].icon = WeatherIcons.snowflake_cold;
-      //     break;
-      //   case 700:
-      //     weatherList[i].icon = WeatherIcons.dust;
-      //     break;
-      //   case 800:
-      //     weatherList[i].icon = WeatherIcons.day_sunny;
-      //     break;
-
-      //   default:
-      //     weatherList[i].icon = WeatherIcons.strong_wind;
-      // }
     }
     return weatherList;
   }

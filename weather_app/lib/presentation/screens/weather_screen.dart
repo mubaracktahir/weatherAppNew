@@ -154,6 +154,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           child: WeatherDisplayTile(
                             humidity: weathers[0].humidity,
                             description: weathers[0].description,
+                            temperature: weathers[0].temperature,
                             increaseTile: increaseWeatherTile,
                           ),
                         ),
@@ -194,6 +195,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                             .add(FilterdLoadedWeatherDayEvent(
                                           day: weathers[index].day,
                                           icon: weathers[index].icon,
+                                          temperature:
+                                              weathers[index].temperature,
                                         ));
                                         showSheet(
                                           context,
@@ -204,7 +207,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                         day: weathers[index].day,
                                         icon: weathers[index].icon,
                                         degree:
-                                            '${weathers[index].humidity.toString()}°',
+                                            '${weathers[index].temperature.round()}°',
                                         minDegree:
                                             '${weathers[index].mintemperature.toString()}°',
                                         maxDegree:

@@ -22,6 +22,7 @@ class Weather {
   String date;
   List<Item> item;
   IconData icon;
+  DateTime dateTime;
 
   Weather({
     this.id,
@@ -39,19 +40,20 @@ class Weather {
     this.date,
     this.item,
     this.icon,
+    this.dateTime,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json, String cityName) {
     var _temp = json['main']['temp'];
     var _mintemperature = json["main"]["temp_min"];
     var _maxtemperature = json["main"]["temp_max"];
-    var icon_url = "http://openweathermap.org/img/w/" +
-        json["weather"][0]["icon"] +
-        ".png";
+    // var icon_url = "http://openweathermap.org/img/w/" +
+    //     json["weather"][0]["icon"] +
+    //     ".png";
     return Weather(
       id: json["weather"][0]["id"],
       day: FormatWeatherData.formatTimeStampToDay(json["dt_txt"]),
-      iconUrl: icon_url,
+      //iconUrl: icon_url,
       humidity: json["main"]['humidity'],
       temperature: _temp.toDouble(),
       mintemperature: _mintemperature.toDouble(),
@@ -62,6 +64,7 @@ class Weather {
       filledIconUrl: json['filledIconColor'],
       date: json["dt_txt"],
       city: cityName,
+      dateTime: FormatWeatherData.fromTimeStampToDateTime(json["dt_txt"]),
     );
   }
 }

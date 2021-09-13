@@ -8,9 +8,10 @@ class WeatherDisplayTile extends StatefulWidget {
   final int humidity;
   final String description;
   final bool increaseTile;
+  final double temperature;
 
   const WeatherDisplayTile(
-      {this.humidity, this.description, this.increaseTile});
+      {this.humidity, this.description, this.increaseTile, this.temperature});
 
   @override
   _WeatherDisplayTileState createState() => _WeatherDisplayTileState();
@@ -49,10 +50,9 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
           alignment: Alignment.center,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            //mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '25°',
+                "${widget.temperature.round()}°",
                 style: TextStyle(
                   fontSize: 130.0,
                   fontWeight: FontWeight.w400,
@@ -65,7 +65,6 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
                   fontSize: 30.0,
                   fontWeight: FontWeight.normal,
                   color: Colors.white,
-                  //height: 2.0,
                 ),
               ),
               Text(
@@ -78,7 +77,7 @@ class _WeatherDisplayTileState extends State<WeatherDisplayTile>
                 ),
               ),
               Text(
-                '${widget.humidity} °',
+                '${widget.humidity}',
                 style: TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,

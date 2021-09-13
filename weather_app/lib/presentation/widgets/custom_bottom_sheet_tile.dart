@@ -43,8 +43,6 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
       width: double.infinity,
       child: BlocBuilder<FilterdWeatherBloc, FilterdWeatherState>(
         builder: (context, state) {
-          // BlocProvider.of<FilterdWeatherBloc>(context)
-          //     .add(FilterdLoadedWeatherDayEvent(day: widget.day));
           if (state is FilterdWeatherLoaded) {
             var dayWeather = state.weatherData;
             return ScaleTransition(
@@ -72,13 +70,24 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                           size: 100,
                           color: Colors.white,
                         ),
-                        Text(
-                          '23°',
-                          style: TextStyle(
-                            fontSize: 61.0,
-                            height: 2,
-                            color: Colors.white,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "${state.temperature.round()}",
+                              style: TextStyle(
+                                fontSize: 61.0,
+                                height: 2,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Icon(
+                              WeatherIcons.celsius,
+                              color: Colors.white,
+                              size: 70,
+                            )
+                          ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -146,17 +155,21 @@ class _CustomButtomSheetTileState extends State<CustomButtomSheetTile>
                           behavior: ScrollBehavior(),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(24.0),
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: dayWeather.length,
-                              itemBuilder: (context, index) {
-                                return CustomDetailTile(
-                                  weatherTime: dayWeather[index].time,
-                                  weatherIcon: dayWeather[index].icon,
-                                  weatherDegree:
-                                      dayWeather[index].temperature.toString(),
-                                );
-                              },
+                            child: Align(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: dayWeather.length,
+                                itemBuilder: (context, index) {
+                                  return CustomDetailTile(
+                                    weatherTime: dayWeather[index].time,
+                                    weatherIcon: dayWeather[index].icon,
+                                    weatherDegree: dayWeather[index]
+                                        .temperature
+                                        .toString(),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
