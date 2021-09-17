@@ -25,7 +25,21 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       weatherList = await weatherRepository.getWeatherData();
     }
 
-    yield WeatherLoaded(weatherData: _refactorWeatherData(weatherList));
+    var currentHour = DateTime.now();
+
+    List<Weather> temp = [];
+
+    for (var i = 0; i < weatherList.length - 1; i++) {
+      //DateTime dateTimeC = DateTime()
+      if (weatherList[i].dateTime.difference(currentHour).inHours < 3 &&
+          weatherList[i].dateTime.difference(currentHour).inHours > 1) {
+        temp.add(weatherList[i]);
+      }
+    }
+
+    weatherList = temp;
+    print('omo ${weatherList.length}');
+    yield WeatherLoaded(weatherData: weatherList);
   }
 
   List<Weather> _refactorWeatherData(List<Weather> weatherList) {
