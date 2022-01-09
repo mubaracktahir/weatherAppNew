@@ -42,21 +42,22 @@ class AppDrawer extends StatelessWidget {
             padding: EdgeInsets.only(left: 12.0),
             alignment: Alignment.centerLeft,
             child: GestureDetector(
-                onTap: () {
-                  showAboutDialog(
-                    context: context,
-                    applicationVersion: '1.0.0',
-                    applicationName: 'WeatherApp',
-                    applicationLegalese:
-                        'An app that gets weather forecast worldwide using device location and search by country/city name.',
-                    applicationIcon: AppIcon(),
-                  );
-                },
-                child: Text(
-                  'About App',
-                  style: TextStyle(
-                      color: AppColor.deepBlue, fontWeight: FontWeight.w500),
-                )),
+              onTap: () {
+                showAboutDialog(
+                  context: context,
+                  applicationVersion: '1.0.0',
+                  applicationName: 'WeatherApp',
+                  applicationLegalese:
+                      'An app that gets weather forecast worldwide using device location and search by country/city name.',
+                  applicationIcon: AppIcon(),
+                );
+              },
+              child: Text(
+                'About App',
+                style: TextStyle(
+                    color: AppColor.deepBlue, fontWeight: FontWeight.w500),
+              ),
+            ),
           )
         ],
       ),

@@ -275,10 +275,3 @@ class _WeatherSplashState extends State<WeatherSplash>
     );
   }
 }
-// ..addStatusListener((status) {
-//             if (status == AnimationStatus.completed && splashFlag != true) {
-//               Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                 return WeatherScreen();
-//               }));
-//             }
-//           });
