@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class CustomDetailTile extends StatelessWidget {
   final String weatherTime;
-  final String weatherIconUrl;
+  final IconData weatherIcon;
   final String weatherDegree;
 
   const CustomDetailTile(
-      {Key key, this.weatherTime, this.weatherIconUrl, this.weatherDegree})
+      {Key key, this.weatherTime, this.weatherIcon, this.weatherDegree})
       : super(key: key);
 
   @override
@@ -17,11 +18,7 @@ class CustomDetailTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(weatherTime),
-          Image.asset(
-            weatherIconUrl,
-            width: 50,
-            height: 50.0,
-          ),
+          BoxedIcon(weatherIcon),
           Text(weatherDegree),
         ],
       ),

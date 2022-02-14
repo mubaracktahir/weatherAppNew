@@ -44,3 +44,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/lib/logic/bloc/internet_bloc
+/lib/presentation/screens/examplePaint.dart

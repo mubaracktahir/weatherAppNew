@@ -13,14 +13,14 @@ class WeatherProvider {
   static Future<http.Response> FetchRawWeatherResponseOnCity(
       {String cityName}) async {
     final response = await http.get(
-        "https://api.openweathermap.org/data/2.5/forecast?q=$cityName&appid=${apiKey}");
+        "https://api.openweathermap.org/data/2.5/forecast?q=$cityName&units=metric&appid=${apiKey}");
     return Future<http.Response>.value(response);
   }
 
   static Future<http.Response> FetchRawWeatherResponseOnLocation(
       {Position position}) async {
     final response = await http.get(
-        "https://api.openweathermap.org/data/2.5/forecast?lat=${position.latitude}&lon=${position.longitude}&appid=${apiKey}");
+        "https://api.openweathermap.org/data/2.5/forecast?lat=${position.latitude}&lon=${position.longitude}&units=metric&appid=${apiKey}");
     if (response.statusCode == 200) {
       return Future<http.Response>.value(response);
     }

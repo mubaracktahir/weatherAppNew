@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/presentation/widgets/custom_bottom_sheet_tile.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class WeatherDayTile extends StatelessWidget {
   final String day;
-  final String icon;
+  final IconData icon;
   final String degree;
   final String minDegree;
   final String maxDegree;
@@ -37,31 +37,27 @@ class WeatherDayTile extends StatelessWidget {
                   color: this.color == null
                       ? Colors.black26
                       : this.color.withOpacity(0.4),
-                  offset: Offset(8, 8),
+                  offset: Offset(6, 6),
                   blurRadius: 3.0,
-                  //spreadRadius: 1.0,
-                )
+                ),
               ],
             ),
             child: Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    this.day == null ? '' : this.day,
+                    this.day ?? '',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 20.0),
-                    child: ImageIcon(
-                      AssetImage(
-                        icon == null ? '' : icon,
-                      ),
-                      color: Colors.white,
-                    ),
+                  BoxedIcon(
+                    icon,
+                    color: Colors.white,
+                    size: 30,
                   ),
                   Text(
                     this.degree == null ? '' : this.degree,
@@ -90,6 +86,9 @@ class WeatherDayTile extends StatelessWidget {
                         style: TextStyle(color: Colors.white),
                       )
                     ],
+                  ),
+                  SizedBox(
+                    height: 10.0,
                   )
                 ],
               ),
