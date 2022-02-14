@@ -21,7 +21,6 @@ class InternetStatus {
   void init() {
     _connectivity.onConnectivityChanged.listen(_connectionChange);
     checkConnection();
-    print('omo ${hasConnection}');
   }
 
   Stream<bool> get connectivityChange => _connectivityController.stream;
@@ -53,7 +52,6 @@ class InternetStatus {
       _connectivityController.add(hasConnection);
     }
 
-    print('yo ${hasConnection}');
     return hasConnection;
   }
 }

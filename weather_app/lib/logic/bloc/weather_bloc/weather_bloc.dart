@@ -25,7 +25,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       weatherList = await weatherRepository.getWeatherData();
     }
 
-    print('omo ${weatherList.length}');
     yield WeatherLoaded(weatherData: _refactorWeatherData(weatherList));
   }
 
